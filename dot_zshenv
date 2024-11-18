@@ -1,0 +1,4 @@
+# Define zsh config directory
+export ZDOTDIR="$HOME/.config/zsh"
+
+source $ZDOTDIR/.zshenv
