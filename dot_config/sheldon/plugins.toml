@@ -13,10 +13,6 @@ github = 'romkatv/zsh-defer'
 apply = ["source"]
 github = 'mollifier/anyframe'
 
-[plugins.powerlevel10k]
-apply = ["source"]
-github = 'romkatv/powerlevel10k'
-
 [plugins.asdf]
 apply = ["defer"]
 github = 'asdf-vm/asdf'

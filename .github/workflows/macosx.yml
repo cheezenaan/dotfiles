@@ -1,0 +1,14 @@
+name: Test instration on macOS
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install chezmoi and apply
+      run: sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply --source .
