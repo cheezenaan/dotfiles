@@ -1,0 +1,3 @@
+cask "google-chrome"
+cask "google-japanese-ime"
+cask "1password"
