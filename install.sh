@@ -56,4 +56,16 @@ if [ -f "brew/Brewfile" ]; then
     fi
 fi
 
+# Optional: Apply MacOS optimized settings
+if [ -f "macos/apply.sh" ]; then
+    log_info "Would you like to apply optimized MacOS settings? [y/N]"
+    log_info "(Faster keyboard, trackpad, Dock, and animations)"
+    read -r answer
+    if [[ "$answer" =~ ^[Yy]$ ]]; then
+        log_info "Applying MacOS settings..."
+        bash "macos/apply.sh"
+        log_info "MacOS settings applied successfully!"
+    fi
+fi
+
 log_info "✨ Setup completed!" 
