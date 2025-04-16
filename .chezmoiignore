@@ -1,0 +1,9 @@
+brew/
+dev/
+macos/
+
+install.sh
+README.md
+
+.gitignore
+./git
