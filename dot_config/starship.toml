@@ -1,0 +1,25 @@
+# ~/.config/starship.toml
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# Change the default prompt format
+format = """$directory$git_branch$git_status$character"""
+
+# Change the default prompt characters
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+
+# Shows the current directory
+[directory]
+truncation_length = 4
+truncation_symbol = "…/"
+
+# Shows the current git branch
+[git_branch]
+symbol = " "
+
+# Shows the current git status
+[git_status]
+style = "bold red" 
