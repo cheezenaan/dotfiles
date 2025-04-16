@@ -1,1 +1,2 @@
 # Additional Applications
+brew "starship"

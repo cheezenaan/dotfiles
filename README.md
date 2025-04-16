@@ -8,6 +8,12 @@ Just run the following command:
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/cheezenaan/dotfiles/main/install.sh)"
 ```
 
+After installation, apply the dotfiles configuration with:
+
+```bash
+chezmoi apply
+```
+
 ## Applications to be installed
 
 ### Essential Applications (brew/Brewfile.core)
