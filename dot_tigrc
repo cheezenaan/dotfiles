@@ -1,0 +1,6 @@
+# メイン画面でコミットIDを表示する
+set main-view = id date author commit-title:graph=yes,refs=yes
+
+# R キーで "git rebase -i" を実行できるようにする
+bind main    R !git rebase -i %(commit)
+bind diff    R !git rebase -i %(commit) 
