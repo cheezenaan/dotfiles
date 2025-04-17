@@ -1,2 +1,11 @@
+# Initialize completion system
+autoload -U compinit; compinit
+
+# Initialize Sheldon plugin manager
+eval "$(sheldon source)"
+
+# Initialize zoxide, as it's more intelligent cd command
+eval "$(zoxide init zsh --cmd cd)" 
+
 # Initialize Starship prompt
 eval "$(starship init zsh)"

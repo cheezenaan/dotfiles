@@ -1,2 +1,9 @@
 # Additional Applications
 brew "starship"
+
+# Fuzzy finder and related tools
+brew "fzf"
+brew "zoxide"
+
+# Plugin manager for zsh
+brew "sheldon"

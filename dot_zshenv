@@ -1,6 +1,5 @@
 # ZDOTDIR configuration, using XDG Base Directory
-export XDG_CONFIG_HOME=$HOME/.config
-export ZDOTDIR=$XDG_CONFIG_HOME/zsh
+export ZDOTDIR=$HOME/.config/zsh
 
 if [[ -f $ZDOTDIR/.zshenv ]]; then
   source $ZDOTDIR/.zshenv
