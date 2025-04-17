@@ -7,4 +7,3 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' menu no
 # Preview directory contents
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -la $realpath'
-

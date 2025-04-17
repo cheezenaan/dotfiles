@@ -1,4 +1,6 @@
 # Additional Applications
+
+# Prompt
 brew "starship"
 
 # Fuzzy finder and related tools
@@ -7,3 +9,9 @@ brew "zoxide"
 
 # Plugin manager for zsh
 brew "sheldon"
+
+# Interactive Git
+brew "tig"
+
+# GitHub repository manager
+brew "ghq"
