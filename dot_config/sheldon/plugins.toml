@@ -1,0 +1,48 @@
+# sheldon configuration file
+# See https://github.com/rossmacarthur/sheldon#configuration
+shell = "zsh"
+
+# Define defer template (needed for deferred loading)
+[templates]
+defer = "{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}{{ hooks?.post | nl }}"
+
+# All plugins in a single [plugins] section
+[plugins]
+
+# Add zsh-defer plugin (must be before any deferred plugins)
+[plugins.zsh-defer]
+github = "romkatv/zsh-defer"
+
+# Source fzf config if installed via Homebrew
+# Ensures fzf's completion and keybindings are loaded by sheldon
+[plugins.fzf-cfg]
+inline = '[[ -f "$(brew --prefix fzf)/shell/completion.zsh" ]] && source "$(brew --prefix fzf)/shell/completion.zsh"'
+[plugins.fzf-keybindings]
+inline = '[[ -f "$(brew --prefix fzf)/shell/key-bindings.zsh" ]] && source "$(brew --prefix fzf)/shell/key-bindings.zsh"'
+
+# --- Core Functionality ---
+# Additional completions (Needs to be sourced)
+[plugins.zsh-completions]
+github = "zsh-users/zsh-completions"
+apply = ["source"]
+
+# Autosuggestions based on history
+[plugins.zsh-autosuggestions]
+github = "zsh-users/zsh-autosuggestions"
+
+# --- Enhanced History and Navigation ---
+# History substring search (binds to up/down arrows etc.)
+[plugins.zsh-history-substring-search]
+github = "zsh-users/zsh-history-substring-search"
+
+# --- fzf Integration ---
+# fzf tab completion (Replaces default tab completion, needs sourcing)
+[plugins.fzf-tab]
+github = "Aloxaf/fzf-tab"
+apply = ["source"]
+
+# --- Syntax Highlighting ---
+# Syntax highlighting (Must be loaded very last for compatibility)
+[plugins.zsh-syntax-highlighting]
+github = "zsh-users/zsh-syntax-highlighting"
+apply = ["defer"]
