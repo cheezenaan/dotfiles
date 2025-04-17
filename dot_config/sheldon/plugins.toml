@@ -46,3 +46,15 @@ apply = ["source"]
 [plugins.zsh-syntax-highlighting]
 github = "zsh-users/zsh-syntax-highlighting"
 apply = ["defer"]
+
+# 即時読み込みするdotfilesの設定ファイル
+[plugins.dotfiles-sync]
+local = "~/.config/zsh/modules"
+use = ["*.zsh"]
+apply = ["source"]
+
+# 遅延読み込みするdotfilesの設定ファイル
+[plugins.dotfiles-defer]
+local = "~/.config/zsh/modules/defer"
+use = ["*.zsh"]
+apply = ["defer"]
