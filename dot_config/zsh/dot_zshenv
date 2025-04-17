@@ -1,25 +1,16 @@
 # PATH configuration
-typeset -U path
-
-# for Homebrew
-if command -v brew >/dev/null 2>&1; then
-  # get brew prefix
-  local brew_prefix
-  brew_prefix=$(brew --prefix)
-  # add bin and sbin to path
-  path=(
-    "${brew_prefix}/bin"
-    "${brew_prefix}/sbin"
-    $path
-  )
-fi
+typeset -U path 
 
 # add other standard paths
 path=(
-  $HOME/.local/bin # user local binary path (optional)
-  /usr/local/bin   # Intel Mac's standard path for Homebrew/manual installation
-  /usr/bin
-  /bin
+  $HOME/.local/bin
   $path
 )
+
+# Remove potential duplicates from PATH (handled by typeset -U path) 
 export PATH 
+
+# Enable Homebrew
+if [[ -x "/opt/homebrew/bin/brew" ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
