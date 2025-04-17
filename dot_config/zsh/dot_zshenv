@@ -1,9 +1,13 @@
+# XDG Base Directory Specification
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_LOCAL_HOME=$HOME/.local
+
 # PATH configuration
 typeset -U path 
 
 # add other standard paths
 path=(
-  $HOME/.local/bin
+  $XDG_LOCAL_HOME/bin
   $path
 )
 
