@@ -12,3 +12,6 @@ brew "sheldon"
 
 # Interactive Git
 brew "tig"
+
+# GitHub repository manager
+brew "ghq"
