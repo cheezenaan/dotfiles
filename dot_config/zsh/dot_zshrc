@@ -1,3 +1,6 @@
+# Initialize completion system
+autoload -U compinit; compinit
+
 # Initialize Sheldon plugin manager
 eval "$(sheldon source)"
 
