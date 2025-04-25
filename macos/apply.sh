@@ -24,59 +24,7 @@ log_error() {
 # スクリプトのディレクトリを取得
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SETTINGS_DIR="${SCRIPT_DIR}/settings"
-BACKUP_DIR="${SCRIPT_DIR}/backup"
 
-# バックアップディレクトリの作成
-mkdir -p "${BACKUP_DIR}"
-
-# タイムスタンプの設定
-TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
-BACKUP_FILE="${BACKUP_DIR}/defaults_backup_${TIMESTAMP}.txt"
-
-log_info "🔄 Creating backup..."
-
-# バックアップする主要なdefaultsドメイン
-DOMAINS=(
-  "NSGlobalDomain"
-  "com.apple.dock"
-  "com.apple.finder"
-  "com.apple.driver.AppleBluetoothMultitouch.trackpad"
-  "com.apple.AppleMultitouchTrackpad"
-  "com.apple.screencapture"
-)
-
-# ファイルの開始部分に時間情報を追加
-echo "# MacOS defaults backup - $(date)" > "${BACKUP_FILE}"
-echo "# ----------------------------------------" >> "${BACKUP_FILE}"
-echo "" >> "${BACKUP_FILE}"
-
-# 各ドメインの設定をバックアップ
-for domain in "${DOMAINS[@]}"; do
-  echo "# Domain: ${domain}" >> "${BACKUP_FILE}"
-  echo "# ----------------------------------------" >> "${BACKUP_FILE}"
-  defaults read "${domain}" 2>/dev/null | sed 's/^/    /' >> "${BACKUP_FILE}" || echo "    # No settings found" >> "${BACKUP_FILE}"
-  echo "" >> "${BACKUP_FILE}"
-done
-
-# 追加のキー設定をバックアップ
-echo "# Current keyboard settings" >> "${BACKUP_FILE}"
-echo "# ----------------------------------------" >> "${BACKUP_FILE}"
-echo "KeyRepeat: $(defaults read NSGlobalDomain KeyRepeat 2>/dev/null || echo "Not set")" >> "${BACKUP_FILE}"
-echo "InitialKeyRepeat: $(defaults read NSGlobalDomain InitialKeyRepeat 2>/dev/null || echo "Not set")" >> "${BACKUP_FILE}"
-echo "AppleKeyboardUIMode: $(defaults read NSGlobalDomain AppleKeyboardUIMode 2>/dev/null || echo "Not set")" >> "${BACKUP_FILE}"
-echo "" >> "${BACKUP_FILE}"
-
-# トラックパッド固有の設定をバックアップ
-echo "# Current trackpad settings" >> "${BACKUP_FILE}"
-echo "# ----------------------------------------" >> "${BACKUP_FILE}"
-echo "Clicking: $(defaults read com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking 2>/dev/null || echo "Not set")" >> "${BACKUP_FILE}"
-echo "com.apple.trackpad.scaling: $(defaults read NSGlobalDomain com.apple.trackpad.scaling 2>/dev/null || echo "Not set")" >> "${BACKUP_FILE}"
-echo "com.apple.mouse.scaling: $(defaults read NSGlobalDomain com.apple.mouse.scaling 2>/dev/null || echo "Not set")" >> "${BACKUP_FILE}"
-echo "" >> "${BACKUP_FILE}"
-
-log_info "✅ Backup created: ${BACKUP_FILE}"
-
-# 各設定を適用
 log_info "🚀 Starting MacOS settings application..."
 
 # アクセス権の付与
