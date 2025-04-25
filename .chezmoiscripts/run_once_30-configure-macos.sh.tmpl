@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -eu
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m' # No Color
+
+# Helper functions
+log_info() {
+    printf "${GREEN}[INFO]${NC} %s\n" "$1"
+}
+
+# Optional: Apply MacOS optimized settings
+MACOS_SCRIPT="{{ .chezmoi.sourceDir }}/macos/apply.sh"
+
+if [ -f "$MACOS_SCRIPT" ]; then
+    log_info "Would you like to apply optimized MacOS settings? [y/N]"
+    log_info "(Faster keyboard, trackpad, Dock, and animations)"
+    read -r answer
+    if [[ "$answer" =~ ^[Yy]$ ]]; then
+        log_info "Applying MacOS settings..."
+        bash "$MACOS_SCRIPT"
+        log_info "MacOS settings applied successfully!"
+    fi
+fi 

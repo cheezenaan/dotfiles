@@ -1,8 +1,6 @@
 brew/
 macos/
 
-install.sh
 README.md
 
 .gitignore
-./git
