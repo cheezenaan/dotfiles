@@ -1,0 +1,59 @@
+#!/bin/bash
+
+set -eu
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m' # No Color
+
+# Helper functions
+log_info() {
+    printf "${GREEN}[INFO]${NC} %s\n" "$1"
+}
+
+log_warn() {
+    printf "${YELLOW}[WARN]${NC} %s\n" "$1"
+}
+
+log_error() {
+    printf "${RED}[ERROR]${NC} %s\n" "$1"
+}
+
+# --- Install Core Applications ---
+BREWFILE_CORE="{{ .chezmoi.sourceDir }}/dot_config/homebrew/Brewfile.core"
+
+log_info "Checking for Core Brewfile..."
+if [ -f "$BREWFILE_CORE" ]; then
+    log_info "Installing essential applications from Brewfile.core..."
+    brew bundle --file="$BREWFILE_CORE"
+else
+    log_warn "Core Brewfile not found at: $BREWFILE_CORE. Skipping core apps installation."
+fi
+
+# --- Optional: Install Additional Applications ---
+BREWFILE="{{ .chezmoi.sourceDir }}/dot_config/homebrew/Brewfile"
+
+log_info "Checking for Additional Brewfile..."
+if [ -f "$BREWFILE" ]; then
+    log_info "Would you like to install additional applications from Brewfile? [y/N]"
+    read -r answer
+    if [[ "$answer" =~ ^[Yy]$ ]]; then
+        log_info "Installing additional applications..."
+        brew bundle --file="$BREWFILE"
+    else
+        log_info "Skipping additional application installation."
+    fi
+else
+    log_info "Additional Brewfile not found at: $BREWFILE. Skipping additional apps installation."
+fi
+
+# --- Manual Configuration Notes ---
+# Configure input sources (Example from original run_once_10)
+log_warn "Remember to configure Google Japanese Input manually if installed:"
+log_info "1. Open System Settings > Keyboard > Input Sources"
+log_info "2. Click '+' button and add 'Google Japanese Input'"
+log_info "3. Remove the default input source if necessary"
+
+log_info "Brew package installation script finished." 
