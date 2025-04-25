@@ -23,12 +23,9 @@ log_error() {
 
 # スクリプトのディレクトリを取得
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SETTINGS_DIR="${SCRIPT_DIR}/settings"
+SETTINGS_DIR="${SCRIPT_DIR}/defaults"
 
 log_info "🚀 Starting MacOS settings application..."
-
-# アクセス権の付与
-chmod +x "${SETTINGS_DIR}"/*.sh
 
 # 各設定スクリプトを実行
 for settings_file in "${SETTINGS_DIR}"/*.sh; do

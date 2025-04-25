@@ -1,0 +1,39 @@
+#!/bin/bash
+
+set -eu
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m' # No Color
+
+# Helper functions
+log_info() {
+    printf "${GREEN}[INFO]${NC} %s\n" "$1"
+}
+
+log_warn() {
+    printf "${YELLOW}[WARN]${NC} %s\n" "$1"
+}
+
+log_error() {
+    printf "${RED}[ERROR]${NC} %s\n" "$1"
+}
+
+# Install core applications via Brewfile.core
+BREWFILE_CORE="{{ .chezmoi.sourceDir }}/Brewfile.core"
+
+log_info "Installing essential applications..."
+if [ -f "$BREWFILE_CORE" ]; then
+    brew bundle --file="$BREWFILE_CORE"
+else
+    log_error "Core Brewfile not found at: $BREWFILE_CORE"
+    exit 1
+fi
+
+# Configure input sources
+log_warn "Please configure Google Japanese Input manually:"
+log_info "1. Open System Settings > Keyboard > Input Sources"
+log_info "2. Click '+' button and add 'Google Japanese Input'"
+log_info "3. Remove the default input source" 

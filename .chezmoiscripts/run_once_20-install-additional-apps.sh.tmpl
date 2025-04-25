@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -eu
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m' # No Color
+
+# Helper functions
+log_info() {
+    printf "${GREEN}[INFO]${NC} %s\n" "$1"
+}
+
+# Optional: Install additional applications
+BREWFILE="{{ .chezmoi.sourceDir }}/Brewfile"
+
+if [ -f "$BREWFILE" ]; then
+    log_info "Would you like to install additional applications? [y/N]"
+    read -r answer
+    if [[ "$answer" =~ ^[Yy]$ ]]; then
+        log_info "Installing additional applications..."
+        brew bundle --file="$BREWFILE"
+    fi
+fi 

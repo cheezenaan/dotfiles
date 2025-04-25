@@ -5,14 +5,19 @@
 Just run the following command:
 
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/cheezenaan/dotfiles/main/install.sh)"
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply https://github.com/cheezenaan/dotfiles.git
 ```
 
-After installation, apply the dotfiles configuration with:
+This single command will:
 
-```bash
-chezmoi apply
-```
+1.  Install chezmoi if it's not present.
+2.  Clone the dotfiles repository.
+3.  Execute the setup scripts (`run_once_*.sh`) in `.chezmoiscripts/`:
+    *   Install Homebrew.
+    *   Install essential applications (`Brewfile.core`).
+    *   Optionally install additional applications (`Brewfile`).
+    *   Optionally apply optimized macOS settings.
+4.  Apply the dotfiles managed by chezmoi.
 
 ## Applications to be installed
 
