@@ -22,7 +22,7 @@ log_error() {
 }
 
 # Install core applications via Brewfile.core
-BREWFILE_CORE="{{ .chezmoi.sourceDir }}/brew/Brewfile.core"
+BREWFILE_CORE="{{ .chezmoi.sourceDir }}/Brewfile.core"
 
 log_info "Installing essential applications..."
 if [ -f "$BREWFILE_CORE" ]; then

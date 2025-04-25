@@ -14,7 +14,7 @@ log_info() {
 }
 
 # Optional: Install additional applications
-BREWFILE="{{ .chezmoi.sourceDir }}/brew/Brewfile"
+BREWFILE="{{ .chezmoi.sourceDir }}/Brewfile"
 
 if [ -f "$BREWFILE" ]; then
     log_info "Would you like to install additional applications? [y/N]"
