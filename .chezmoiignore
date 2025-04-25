@@ -1,5 +1,4 @@
-macos/
-
 README.md
 
-.gitignore
+# Directories
+settings/
