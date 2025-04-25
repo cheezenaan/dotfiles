@@ -4,3 +4,6 @@
 
 [ghq]
 	root = ~/src 
+
+[push]
+	autoSetupRemote = true
