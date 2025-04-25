@@ -13,8 +13,8 @@ log_info() {
     printf "${GREEN}[INFO]${NC} %s\n" "$1"
 }
 
-# Optional: Apply MacOS optimized settings
-MACOS_SCRIPT="{{ .chezmoi.sourceDir }}/macos/apply.sh"
+# macOSの設定を適用するスクリプトのパス
+MACOS_SCRIPT="{{ .chezmoi.sourceDir }}/settings/macos/apply.sh"
 
 if [ -f "$MACOS_SCRIPT" ]; then
     log_info "Would you like to apply optimized MacOS settings? [y/N]"
