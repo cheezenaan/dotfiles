@@ -35,6 +35,16 @@ for settings_file in "${SETTINGS_DIR}"/*.sh; do
     fi
 done
 
+# Apply specific plist modifications
+log_info "Applying plist modifications..."
+
+for plist_file in "${SCRIPT_DIR}/plists"/*.sh; do
+    if [ -f "${plist_file}" ]; then
+        log_info "Applying: $(basename "${plist_file}")"
+        "${plist_file}"
+    fi
+done
+
 # 設定を反映するためのプロセスの再起動
 log_info "🔄 Restarting processes to apply settings..."
 

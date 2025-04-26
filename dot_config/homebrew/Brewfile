@@ -15,3 +15,6 @@ brew "tig"
 
 # GitHub repository manager
 brew "ghq"
+
+# Raycast
+cask "raycast"
