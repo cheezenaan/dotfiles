@@ -2,7 +2,19 @@
 
 ## Installation
 
-Just run the following command:
+**1. Install Homebrew (if not already installed):**
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# Add Homebrew to your PATH (instructions provided by the installer)
+# Example for zsh:
+# echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+# eval "$(/opt/homebrew/bin/brew shellenv)"
+```
+
+**2. Install chezmoi and apply dotfiles:**
+
+Run the following command:
 
 ```bash
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply https://github.com/cheezenaan/dotfiles.git
