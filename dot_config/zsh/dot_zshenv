@@ -2,16 +2,17 @@
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_LOCAL_HOME=$HOME/.local
 
-# Enable Homebrew
-if [[ -x "/opt/homebrew/bin/brew" ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
-typeset -U path
-
+# Set additional paths
 path=(
   $XDG_LOCAL_HOME/bin
   $path
 )
 
+# Enable Homebrew
+if [[ -x "/opt/homebrew/bin/brew" ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+# Remove duplicates from PATH (preserving order)
+typeset -U path
 export PATH
