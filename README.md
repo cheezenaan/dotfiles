@@ -6,10 +6,6 @@
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-# Add Homebrew to your PATH (instructions provided by the installer)
-# Example for zsh:
-# echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
-# eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
 
 **2. Install chezmoi and apply dotfiles:**
@@ -25,7 +21,6 @@ This single command will:
 1.  Install chezmoi if it's not present.
 2.  Clone the dotfiles repository.
 3.  Execute the setup scripts (`run_once_*.sh`) in `.chezmoiscripts/`:
-    *   Install Homebrew.
     *   Install essential applications (`Brewfile.core`).
     *   Optionally install additional applications (`Brewfile`).
     *   Optionally apply optimized macOS settings.
