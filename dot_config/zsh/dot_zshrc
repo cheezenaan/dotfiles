@@ -9,3 +9,6 @@ eval "$(zoxide init zsh --cmd cd)"
 
 # Initialize Starship prompt
 eval "$(starship init zsh)"
+
+# Initialize mise (version manager)
+eval "$(mise activate zsh)"

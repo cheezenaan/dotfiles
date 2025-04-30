@@ -16,3 +16,6 @@ brew "ghq"
 
 # Raycast
 cask "raycast"
+
+# Language version manager
+brew "mise"
