@@ -60,4 +60,5 @@ You can customize the applications to be installed by editing these files as nee
 
 ## License
 
-MIT 
+MIT
+
