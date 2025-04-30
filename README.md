@@ -2,13 +2,25 @@
 
 ## Installation
 
-**1. Install Homebrew (if not already installed):**
+**1. Update macOS :**
+
+```bash
+sudo softwareupdate -ia --agree-to-license
+```
+
+**For Apple Silicon Mac users, install Rosetta 2:**
+
+```bash
+sudo softwareupdate --install-rosetta --agree-to-license
+```
+
+**2. Install Homebrew (if not already installed):**
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-**2. Install chezmoi and apply dotfiles:**
+**3. Install chezmoi and apply dotfiles:**
 
 Run the following command:
 
