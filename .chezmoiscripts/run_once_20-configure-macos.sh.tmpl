@@ -17,12 +17,7 @@ log_info() {
 MACOS_SCRIPT="{{ .chezmoi.sourceDir }}/settings/macos/apply.sh"
 
 if [ -f "$MACOS_SCRIPT" ]; then
-    log_info "Would you like to apply optimized MacOS settings? [y/N]"
-    log_info "(Faster keyboard, trackpad, Dock, and animations)"
-    read -r answer
-    if [[ "$answer" =~ ^[Yy]$ ]]; then
-        log_info "Applying MacOS settings..."
-        bash "$MACOS_SCRIPT"
-        log_info "MacOS settings applied successfully!"
-    fi
+    log_info "Applying MacOS settings..."
+    bash "$MACOS_SCRIPT"
+    log_info "MacOS settings applied successfully!"
 fi 

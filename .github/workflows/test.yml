@@ -1,0 +1,21 @@
+name: Test 
+
+on:
+  - push
+
+jobs:
+  test:
+    runs-on: macos-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4 
+      
+      - name: Install and setup Homebrew
+        run: |
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      
+      - name: Install and apply chezmoi
+        run: |
+          sh -c "$(curl -fsLS chezmoi.io/get)" -- init --apply -S .
+        

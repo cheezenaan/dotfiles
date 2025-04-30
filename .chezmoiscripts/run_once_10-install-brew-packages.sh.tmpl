@@ -21,6 +21,14 @@ log_error() {
     printf "${RED}[ERROR]${NC} %s\n" "$1"
 }
 
+# Ensure Homebrew PATH is set for this script execution
+if command -v brew &> /dev/null; then
+    eval "$(brew shellenv)"
+else
+    log_error "brew command not found. Please ensure Homebrew is installed."
+    exit 1
+fi
+
 # --- Install Core Applications ---
 BREWFILE_CORE="{{ .chezmoi.sourceDir }}/dot_config/homebrew/Brewfile.core"
 
@@ -37,23 +45,8 @@ BREWFILE="{{ .chezmoi.sourceDir }}/dot_config/homebrew/Brewfile"
 
 log_info "Checking for Additional Brewfile..."
 if [ -f "$BREWFILE" ]; then
-    log_info "Would you like to install additional applications from Brewfile? [y/N]"
-    read -r answer
-    if [[ "$answer" =~ ^[Yy]$ ]]; then
         log_info "Installing additional applications..."
-        brew bundle --file="$BREWFILE"
-    else
-        log_info "Skipping additional application installation."
-    fi
+    brew bundle --file="$BREWFILE"
 else
     log_info "Additional Brewfile not found at: $BREWFILE. Skipping additional apps installation."
 fi
-
-# --- Manual Configuration Notes ---
-# Configure input sources (Example from original run_once_10)
-log_warn "Remember to configure Google Japanese Input manually if installed:"
-log_info "1. Open System Settings > Keyboard > Input Sources"
-log_info "2. Click '+' button and add 'Google Japanese Input'"
-log_info "3. Remove the default input source if necessary"
-
-log_info "Brew package installation script finished." 
