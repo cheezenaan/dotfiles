@@ -1,2 +1,5 @@
 # MacOS defaults backup
 macos/backup/ 
+
+# Local-only settings
+*.local
