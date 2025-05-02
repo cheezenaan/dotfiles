@@ -7,3 +7,8 @@
 
 [push]
 	autoSetupRemote = true
+
+# プロジェクト固有の設定は ~/.config/git/local.gitconfig で管理する
+# ref. https://uvb-76.hatenablog.com/entry/2021/12/11/235908
+[include]
+	path = ~/.config/git/local.gitconfig
