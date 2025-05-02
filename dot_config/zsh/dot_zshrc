@@ -12,3 +12,8 @@ eval "$(starship init zsh)"
 
 # Initialize mise (version manager)
 eval "$(mise activate zsh)"
+
+# Load local-only settings
+if [[ -f "${ZDOTDIR}/.zshrc.local" ]]; then
+  source "${ZDOTDIR}/.zshrc.local"
+fi
