@@ -19,3 +19,6 @@ cask "raycast"
 
 # Language version manager
 brew "mise"
+
+# Terminal
+cask "wezterm"
