@@ -22,6 +22,10 @@ defaults write com.apple.dock mineffect -string "scale"
 # デフォルト値: 48
 defaults write com.apple.dock tilesize -int 36
 
+# Dockの位置を左に設定
+# デフォルト値: bottom
+defaults write com.apple.dock orientation -string "left"
+
 # 最近使ったアプリケーションをDockに表示しない
 # デフォルト値: true
 defaults write com.apple.dock show-recents -bool false
