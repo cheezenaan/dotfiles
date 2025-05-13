@@ -20,7 +20,15 @@ defaults write com.apple.dock mineffect -string "scale"
 
 # Dockのアイコンサイズを設定
 # デフォルト値: 48
-defaults write com.apple.dock tilesize -int 36
+defaults write com.apple.dock tilesize -int 60
+
+# Dockの拡大機能を有効にする
+# デフォルト値: false
+defaults write com.apple.dock magnification -bool true
+
+# Dockの拡大時のアイコンサイズを設定
+# デフォルト値: 64 (タイルサイズの1.5倍程度)
+defaults write com.apple.dock largesize -int 120
 
 # Dockの位置を左に設定
 # デフォルト値: bottom
