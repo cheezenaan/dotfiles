@@ -22,3 +22,6 @@ brew "mise"
 
 # Terminal
 cask "wezterm"
+
+brew "direnv"
+
