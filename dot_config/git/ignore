@@ -1,0 +1,15 @@
+# VS Code
+.vscode/*
+
+## settings
+## プロジェクト共通の設定は、下の tasks.json や launch.json などで行うことを想定
+## エディタの配色や挙動設定は、個人の環境に依存するため、無視することにする
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+## for multi-root workspace
+*.code-workspace
+
+## for local History
+.history/ 
