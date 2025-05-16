@@ -5,3 +5,5 @@ jobs = 4
 # Automatically install commands when not found
 not_found_auto_install = true
 
+[tools]
+uv = "latest"
