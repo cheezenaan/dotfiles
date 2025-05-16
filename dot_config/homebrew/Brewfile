@@ -25,3 +25,7 @@ cask "wezterm"
 
 brew "direnv"
 
+# Additional fonts for terminal, editor, etc.
+cask "font-plemol-jp"
+cask "font-hackgen"
+cask "font-udev-gothic"
