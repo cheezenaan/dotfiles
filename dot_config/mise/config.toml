@@ -6,4 +6,5 @@ jobs = 4
 not_found_auto_install = true
 
 [tools]
+node = "latest"
 uv = "latest"
