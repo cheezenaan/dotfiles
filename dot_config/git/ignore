@@ -13,3 +13,6 @@
 
 ## for local History
 .history/ 
+
+## for local memo, settings, etc.
+.tmp/**/*.md
