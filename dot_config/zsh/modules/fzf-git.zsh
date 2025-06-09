@@ -10,4 +10,7 @@ function ghq-fzf-cd() {
 }
 
 zle -N ghq-fzf-cd
-bindkey '^g' ghq-fzf-cd 
+
+# Use CTRL+G for ghq repository selection
+# fzf-git.sh provides CTRL+G+F for git file selection automatically
+bindkey '^g' ghq-fzf-cd

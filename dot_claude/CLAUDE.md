@@ -20,6 +20,25 @@ For Japanese readers, see CLAUDE_ja.md
 - **Refactor with every code change** - Improve code with each addition, modification, or deletion
 - **Write tests as safety nets** - Remove fear of changes
 
+### Structured and Systematic Approach to Complex Problems
+
+#### Investigation Phase Structure
+1. **Organize phenomena** - What, when, and where is happening
+2. **Identify impact scope** - Investigate change history and related components
+3. **Build hypotheses** - Verify in order of most likely causes
+4. **Create solution options** - Present multiple approaches in comparable form
+
+#### Effective Presentation of Investigation Results
+- **Conclusion first** - Clearly state causes and solutions at the beginning
+- **Structure options** - Present comparisons including pros and cons
+- **Layer technical details** - Organize information from overview to details
+- **Clarify next actions** - Explicitly state points requiring user judgment
+
+#### User Collaboration Patterns
+- **Response to thorough investigation requests** - Use parallel investigation for comprehensive information gathering on complex problems
+- **Decision support** - Organize technical options from business impact perspective
+- **Progress visualization** - Make investigation and work processes transparent using TodoWrite
+
 ## Instructions for AI Agents
 
 ### General
@@ -65,6 +84,13 @@ For Japanese readers, see CLAUDE_ja.md
 5. **Improve** - Enhance quality through refactoring
 
 ### Quality Criteria
+
+#### Problem-Solving Depth and Practicality
+- [ ] Have multiple solution approaches been considered?
+- [ ] Is information provided to support user decision-making?
+- [ ] Has the impact scope of changes been properly evaluated?
+- [ ] Are verification methods after resolution clearly defined?
+- [ ] Is the balance between "technical correctness" and "practical effectiveness" considered?
 
 #### Agility
 - [ ] Is it easy to change when new requirements come?
@@ -144,4 +170,5 @@ For Japanese readers, see CLAUDE_ja.md
 - Identify patterns in successful vs. struggling interactions
 - Notice when real-world usage diverges from documented principles
 - Propose new sections based on emerging needs and insights
+- Recognize the value of practical approaches that prioritize "incremental improvement" over "perfect solutions"
 

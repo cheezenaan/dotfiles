@@ -41,6 +41,11 @@ github = "zsh-users/zsh-history-substring-search"
 github = "Aloxaf/fzf-tab"
 apply = ["source"]
 
+# fzf-git integration (git operations with fzf)
+[plugins.fzf-git]
+github = "junegunn/fzf-git.sh"
+apply = ["defer"]
+
 # --- Syntax Highlighting ---
 # Syntax highlighting (Must be loaded very last for compatibility)
 [plugins.zsh-syntax-highlighting]
