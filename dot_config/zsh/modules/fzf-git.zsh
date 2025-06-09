@@ -9,18 +9,8 @@ function ghq-fzf-cd() {
   zle reset-prompt
 }
 
-# Smart context-aware fzf function
-function smart-fzf() {
-  if git rev-parse --git-dir > /dev/null 2>&1; then
-    # Inside git repository - show git file selector
-    _fzf_git_files
-  else
-    # Outside git repository - show ghq repository selector
-    ghq-fzf-cd
-  fi
-  zle reset-prompt
-}
-
 zle -N ghq-fzf-cd
-zle -N smart-fzf
-bindkey '^g' smart-fzf 
+
+# Use CTRL+G for ghq repository selection
+# fzf-git.sh provides CTRL+G+F for git file selection automatically
+bindkey '^g' ghq-fzf-cd
