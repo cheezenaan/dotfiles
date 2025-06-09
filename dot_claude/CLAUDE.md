@@ -123,3 +123,25 @@ For Japanese readers, see CLAUDE_ja.md
 ❌ `fix: Update code` - Unclear what was fixed  
 ⭕ `fix: Resolve user login timeout after 5 minutes` - Clear problem and solution
 
+## Document Self-Improvement Process
+
+### Improvement Triggers
+- Completed multiple turns within one session (guideline: 5+ iterations)
+- Encountered new types of challenges not covered in guidelines
+- Discovered more effective approaches through session practice
+- User feedback revealed gaps or unclear instructions
+
+### Improvement Actions
+
+#### MUST: Always execute these
+- Extract lessons from challenging problem-solving processes
+- Propose improvements to this document after complex sessions
+- Offer revision proposals when better expressions are found
+- Suggest concrete additions when gaps are discovered through practice
+
+#### IMPORTANT: Always keep in mind
+- Reflect on which guidelines were most/least effective in practice
+- Identify patterns in successful vs. struggling interactions
+- Notice when real-world usage diverges from documented principles
+- Propose new sections based on emerging needs and insights
+
