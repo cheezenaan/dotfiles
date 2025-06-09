@@ -1,99 +1,125 @@
 # CLAUDE.md
 
-## 基本方針
+<!-- 
+This is the master configuration file for AI agents.
+For Japanese readers, see CLAUDE_ja.md
+-->
 
-### 進化を支える開発原則
-- **変更しやすさを最優先に設計する** - 将来の変更を妨げない構造を作る
-- **責任を明確に分離する** - 一つの機能は一つの場所で完結させる  
-- **依存関係を最小限にする** - 密結合を避け、独立性を保つ
-- **抽象化レベルを統一する** - 同じレイヤーでは同じ抽象度で記述する
-- **命名で意図を表現する** - コードが自己説明的になるよう丁寧に命名する
+## Core Philosophy
 
-### 継続的改善の実践
-- **小さなステップで前進する** - 一度に変更する範囲を最小限に留める
-- **動作確認を頻繁に行う** - 各ステップで必ず検証する
-- **リファクタリングを日常的に行う** - 機能追加の度にコードの改善も実施する
-- **テストを書いて安全網を作る** - 変更に対する恐怖を取り除く
+### Development Principles for Evolution
+- **Design for changeability as the top priority** - Localize impact scope when adding new features
+- **Clearly separate responsibilities** - Complete one function in one place
+- **Express intent through naming** - Name so you can understand it in 6 months
+- **Minimize dependencies** - Avoid tight coupling and maintain independence
+- **Unify abstraction levels** - Maintain consistent abstraction within the same layer
 
-## 開発ワークフロー
+### Continuous Improvement Practices
+- **Progress in small steps** - Keep each change scope minimal
+- **Verify operations at each step** - Check correctness as you progress
+- **Refactor with every code change** - Improve code with each addition, modification, or deletion
+- **Write tests as safety nets** - Remove fear of changes
 
-### 実装の進め方
-1. **理解** - 既存コードとドメインを把握する
-2. **設計** - 変更箇所と影響範囲を明確にする  
-3. **実装** - 最小限の変更で動作させる
-4. **検証** - 動作確認とテスト追加
-5. **改善** - リファクタリングで品質向上
+## Instructions for AI Agents
 
-### 品質チェックポイント
+### General
 
-#### アジリティ
-- [ ] 新しい要求が来た時に変更しやすいか？
-- [ ] 機能を拡張する時に既存コードを壊さないか？
-- [ ] コードの意図が6ヶ月後の自分にも理解できるか？
-- [ ] 他の開発者がすぐに理解できる構造か？
-- [ ] テストが変更を安全にサポートしているか？
-- [ ] モジュール間の依存関係が最小限になっているか？
+#### NEVER: Never do these things
+- Delete files without explicit user confirmation
+- Change code without understanding existing implementation
 
-#### パフォーマンス
-- [ ] 処理時間が既存の同等機能と同程度か？
-- [ ] メモリ使用量が想定範囲内か？
-- [ ] データベースクエリが効率的か？
-- [ ] ボトルネックが特定しやすい構造になっているか？
-- [ ] 不要な処理や重複処理がないか？
+#### MUST: Always execute these
+- Always respond in Japanese
+- Always understand structure and intent of existing code before changes
+- Always implement in small, incremental steps
+- Always present verification methods after implementation
 
-#### エラーハンドリング
-- [ ] 全ての例外パスでエラーメッセージが返されるか？
-- [ ] 外部依存が失敗した時のフォールバック処理があるか？
-- [ ] エラー時にもシステムが安定した状態を保てるか？
-- [ ] ユーザーにとって理解しやすいエラーメッセージか？
-- [ ] 部分的な失敗でもサービス継続できるか？
+#### IMPORTANT: Always keep in mind
+- Prioritize changeable code over merely working code
+- Consider long-term maintainability over short-term solutions
+- Explain code intent and design decisions
+- Choose continuous improvement over perfection
+- Proactively suggest refactoring opportunities
+- Encourage test additions and improvements
 
-#### セキュリティリスク
-- [ ] 秘密情報がログやレスポンスに出力されていないか？
-- [ ] 入力値の検証が境界値まで含めて実装されているか？
-- [ ] 認証・認可が適切に機能するか？
-- [ ] 権限昇格の脆弱性がないか？
-- [ ] 外部API呼び出しが安全に実装されているか？
+### Commit Message Creation Support
 
-#### ログや監視の仕組み
-- [ ] 問題発生時に原因を特定できる情報が記録されるか？
-- [ ] 重要な処理の開始・終了が追跡できるか？
-- [ ] 異常な状況を検知する仕組みがあるか？
-- [ ] パフォーマンスメトリクスが取得できるか？
-- [ ] ビジネス価値の測定が可能か？
+#### MUST: Always execute these
+- Present multiple proposals (minimum 3)
+- Create proposals within 50-60 characters
+- Express concisely yet information-rich
 
-## Claude Code への指示
+#### IMPORTANT: Always keep in mind
+- Focus not only on "what" but also "why" and "how"
+- Include user proposals in comparison
+- Present balance between character count and content
+- Make suggestions considering grammar and conventions
 
-### 全般
+## Development Workflow
 
-#### NEVER（絶対禁止）
-- ファイルの削除を行うこと
-- git commit や git push の実行
-- 既存コードを理解せずに変更すること
+### Implementation Process
+1. **Understand** - Grasp existing code and domain knowledge
+2. **Design** - Clarify change locations and impact scope
+3. **Implement** - Make it work with minimal changes
+4. **Verify** - Confirm operation and add tests
+5. **Improve** - Enhance quality through refactoring
 
-#### YOU MUST（必須事項）
-- 日本語で応答すること
-- 変更前に必ず既存コードの構造と意図を把握すること
-- 実装後は必ず動作確認の方法を提示すること
-- 小さな変更に分割して段階的に実装すること
+### Quality Criteria
 
-### IMPORTANT（重要事項）
-- 動くコードよりも変更しやすいコードを重視すること
-- 短期的な解決より長期的な保守性を考慮すること
-- リファクタリングの機会を積極的に提案すること
-- テストの追加や改善を促すこと
-- コードの意図や設計判断を説明すること
-- 完璧よりも継続的改善を選択すること
+#### Agility
+- [ ] Is it easy to change when new requirements come?
+- [ ] Can features be extended without breaking existing code?
+- [ ] Will the code intent be clear to yourself in 6 months?
+- [ ] Can other developers understand the structure immediately?
+- [ ] Do tests safely support changes?
+- [ ] Are inter-module dependencies minimized?
 
-### コミットメッセージ作成時の支援
+#### Performance
+- [ ] Is processing time comparable to existing equivalent features?
+- [ ] Is memory usage within expected range?
+- [ ] Are database queries efficient?
+- [ ] Is the structure easy to identify bottlenecks?
+- [ ] Are there no unnecessary or duplicate processes?
 
-#### YOU MUST（必須事項）
-- 複数の案を提示すること(最低 3 つ)
-- 50 文字から 60 文字以内で案を作成すること
-- 情報密度の最大化という観点から評価すること
+#### Error Handling
+- [ ] Do all exception paths return error messages?
+- [ ] Is there fallback processing when external dependencies fail?
+- [ ] Can the system maintain stable state even during errors?
+- [ ] Are error messages understandable to users?
+- [ ] Can service continue despite partial failures?
 
-#### IMPORTANT（重要事項）
-- ｢何を｣だけでなく｢なぜ｣｢どのように｣も重視すること
-- 文字数と内容のバランスを提示すること
-- 文法や慣例の観点からも提案すること
-- ユーザーの案も含めて比較検討すること
+#### Security Risks
+- [ ] Is sensitive information not output to logs or responses?
+- [ ] Is input validation implemented including boundary values?
+- [ ] Do authentication and authorization function properly?
+- [ ] Are there no privilege escalation vulnerabilities?
+- [ ] Are external API calls implemented safely?
+
+#### Logging and Monitoring
+- [ ] Is information recorded to identify causes when problems occur?
+- [ ] Can start and end of important processes be tracked?
+- [ ] Are there mechanisms to detect abnormal situations?
+- [ ] Can performance metrics be obtained?
+- [ ] Is business value measurement possible?
+
+## Documentation Principles
+
+### Concrete yet Natural Language
+- **Avoid abstract rhetoric** - Don't use expressions that don't lead to action
+- **Use actionable expressions** - Make clear what readers should do
+- **Include measurable criteria** - Provide specificity that removes guesswork
+
+### Good and Bad Examples
+
+#### Code Expressions
+❌ `getUserData()` - Unclear what data  
+⭕ `getActiveUserProfileForDashboard()` - Clear purpose and target
+
+#### Documentation Expressions
+❌ "Value quality" (vague)  
+⭕ "Verify existing functionality doesn't break when making changes" (concrete and natural)
+
+#### Commit Messages
+❌ `fix: Update code` - Unclear what was fixed  
+⭕ `fix: Resolve user login timeout after 5 minutes` - Clear problem and solution
+
