@@ -28,6 +28,54 @@ For Japanese readers, see CLAUDE_ja.md
 3. **Build hypotheses** - Verify in order of most likely causes
 4. **Create solution options** - Present multiple approaches in comparable form
 
+#### Multi-layered System Root Cause Analysis
+- **Architecture mapping creation** - Explicitly draw system configuration diagrams to visualize investigation scope
+- **Problem layer identification from error messages** - Be aware of the difference between surface symptoms and true causal layers
+- **Upstream dependency tracking** - Trace back from error-occurring layers to prerequisite upper-layer configurations
+
+**Generic analysis pattern:**
+
+```mermaid
+graph TD
+    A[Surface Error] --> B[Direct Cause Investigation]
+    A --> C[Architecture Layer Analysis]
+    B --> D[Technology A Specific Issue]
+    C --> E[Technology B Permission Issue]
+    E --> F[Root Cause Discovery]
+    
+    style C fill:#90EE90
+    style E fill:#90EE90
+    style F fill:#FFD700
+```
+
+#### System Component Investigation Systematization
+- **Comparative analysis pattern** - Parallel comparison of configurations between normally functioning similar features and problem areas
+- **Access control hierarchy visualization** - Diagram permission/authentication/authorization inheritance relationships to identify gaps
+- **Structural understanding of configuration differences** - Analyze structural reasons behind differences, not just simple diffs
+
+**Configuration investigation checklist:**
+- [ ] Compared with similar normally functioning system configurations?
+- [ ] Identified problem introduction point from configuration change history?
+- [ ] Confirmed configuration differences between environments (dev/prod)?
+- [ ] Cross-checked network, database, and application layer configurations?
+
+#### Common Investigation Pitfalls and Avoidance
+- **Set appropriate investigation focus**
+    - ❌ **Fixating on surface errors**
+    - ⭕ **Draw complete architecture diagram in first 15 minutes**
+- **Diversify investigation approaches**
+    - ❌ **Linear investigation**
+    - ⭕ **Verify minimum 3 hypotheses in parallel**
+- **Understand the essence of configuration differences**
+    - ❌ **Configuration diff listing**
+    - ⭕ **Analyze structural reasons behind diffs first**
+- **Verify information source reliability**
+    - ❌ **Technical documentation blind faith**
+    - ⭕ **Always suspect discrepancies with actual behavior**
+- **Expand solution scope**
+    - ❌ **Localized problem solving**
+    - ⭕ **Include prevention strategies for similar issues**
+
 #### Effective Presentation of Investigation Results
 - **Conclusion first** - Clearly state causes and solutions at the beginning
 - **Structure options** - Present comparisons including pros and cons
@@ -73,6 +121,20 @@ For Japanese readers, see CLAUDE_ja.md
 - Include user proposals in comparison
 - Present balance between character count and content
 - Make suggestions considering grammar and conventions
+
+### Troubleshooting Resolution Support
+
+#### MUST: Always execute these
+- Do not interpret error messages superficially; analyze them in the context of system architecture
+- Accurately identify the technical layer where problems occur in the early stages of investigation
+- Execute parallel comparative analysis with normally functioning similar features
+- In system configuration investigations, systematically verify all layers of access control hierarchy
+
+#### IMPORTANT: Always keep in mind
+- In environments where multiple systems collaborate, be aware of upstream to downstream dependency impacts
+- Utilize users' technical insights as important clues for investigation
+- When initial approaches fail to resolve issues, reflect on reasons and approaches to improve the investigation process itself
+- After troubleshooting resolution, propose systematic checklists to prevent similar issues
 
 ## Development Workflow
 
