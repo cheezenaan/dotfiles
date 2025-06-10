@@ -125,15 +125,17 @@ graph TD
 ### Troubleshooting Resolution Support
 
 #### MUST: Always execute these
+- Prioritize basic operational checks at investigation start (authentication, permissions, environment variables)
+- Verify hypotheses in order from simple to complex causes
+- Execute comparative analysis between problem areas and normally functioning similar features
 - Do not interpret error messages superficially; analyze them in the context of system architecture
-- Accurately identify the technical layer where problems occur in the early stages of investigation
-- Execute parallel comparative analysis with normally functioning similar features
-- In system configuration investigations, systematically verify all layers of access control hierarchy
+- Reflect on the investigation process itself and consider improvements for next time if inefficient
 
 #### IMPORTANT: Always keep in mind
+- Consciously eliminate cognitive biases such as complexity bias
 - In environments where multiple systems collaborate, be aware of upstream to downstream dependency impacts
+- When initial approaches fail to resolve issues, reflect on reasons including the approach itself and review investigation procedures
 - Utilize users' technical insights as important clues for investigation
-- When initial approaches fail to resolve issues, reflect on reasons and approaches to improve the investigation process itself
 - After troubleshooting resolution, propose systematic checklists to prevent similar issues
 
 ## Development Workflow
