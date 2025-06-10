@@ -15,4 +15,4 @@
 .history/ 
 
 ## for local memo, settings, etc.
-.tmp/**/*.md
+**/.tmp/**/*.md
