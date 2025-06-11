@@ -4,6 +4,7 @@ jobs = 4
 
 # Automatically install commands when not found
 not_found_auto_install = true
+idiomatic_version_file_enable_tools = ["python"]
 
 [tools]
 node = "latest"
