@@ -9,35 +9,35 @@ For Japanese readers, see CLAUDE_ja.md
 
 ### Development Principles for Evolution
 
-- **Design for changeability as the top priority** - Localize impact scope when adding new features
-- **Clearly separate responsibilities** - Complete one function in one place
-- **Express intent through naming** - Name so you can understand it in 6 months
-- **Minimize dependencies** - Avoid tight coupling and maintain independence
-- **Unify abstraction levels** - Maintain consistent abstraction within the same layer
+- Design for changeability as the top priority - Localize impact scope when adding new features
+- Clearly separate responsibilities - Complete one function in one place
+- Express intent through naming - Name so you can understand it in 6 months
+- Minimize dependencies - Avoid tight coupling and maintain independence
+- Unify abstraction levels - Maintain consistent abstraction within the same layer
 
 ### Continuous Improvement Practices
 
-- **Progress in small steps** - Keep each change scope minimal
-- **Verify operations at each step** - Check correctness as you progress
-- **Refactor with every code change** - Improve code with each addition, modification, or deletion
-- **Write tests as safety nets** - Remove fear of changes
+- Progress in small steps - Keep each change scope minimal
+- Verify operations at each step - Check correctness as you progress
+- Refactor with every code change - Improve code with each addition, modification, or deletion
+- Write tests as safety nets - Remove fear of changes
 
 ### Structured and Systematic Approach to Complex Problems
 
 #### Investigation Phase Structure
 
-1. **Organize phenomena** - What, when, and where is happening
-2. **Identify impact scope** - Investigate change history and related components
-3. **Build hypotheses** - Verify in order of most likely causes
-4. **Create solution options** - Present multiple approaches in comparable form
+1. Organize phenomena - What, when, and where is happening
+2. Identify impact scope - Investigate change history and related components
+3. Build hypotheses - Verify in order of most likely causes
+4. Create solution options - Present multiple approaches in comparable form
 
 #### Multi-layered System Root Cause Analysis
 
-- **Architecture mapping creation** - Explicitly draw system configuration diagrams to visualize investigation scope
-- **Problem layer identification from error messages** - Be aware of the difference between surface symptoms and true causal layers
-- **Upstream dependency tracking** - Trace back from error-occurring layers to prerequisite upper-layer configurations
+- Architecture mapping creation - Explicitly draw system configuration diagrams to visualize investigation scope
+- Problem layer identification from error messages - Be aware of the difference between surface symptoms and true causal layers
+- Upstream dependency tracking - Trace back from error-occurring layers to prerequisite upper-layer configurations
 
-**Generic analysis pattern:**
+Generic analysis pattern:
 
 ```mermaid
 graph TD
@@ -54,11 +54,11 @@ graph TD
 
 #### System Component Investigation Systematization
 
-- **Comparative analysis pattern** - Parallel comparison of configurations between normally functioning similar features and problem areas
-- **Access control hierarchy visualization** - Diagram permission/authentication/authorization inheritance relationships to identify gaps
-- **Structural understanding of configuration differences** - Analyze structural reasons behind differences, not just simple diffs
+- Comparative analysis pattern - Parallel comparison of configurations between normally functioning similar features and problem areas
+- Access control hierarchy visualization - Diagram permission/authentication/authorization inheritance relationships to identify gaps
+- Structural understanding of configuration differences - Analyze structural reasons behind differences, not just simple diffs
 
-**Configuration investigation checklist:**
+Configuration investigation checklist:
 
 - [ ] Compared with similar normally functioning system configurations?
 - [ ] Identified problem introduction point from configuration change history?
@@ -67,34 +67,34 @@ graph TD
 
 #### Common Investigation Pitfalls and Avoidance
 
-- **Set appropriate investigation focus**
-  - ❌ **Fixating on surface errors**
-  - ⭕ **Draw complete architecture diagram in first 15 minutes**
-- **Diversify investigation approaches**
-  - ❌ **Linear investigation**
-  - ⭕ **Verify minimum 3 hypotheses in parallel**
-- **Understand the essence of configuration differences**
-  - ❌ **Configuration diff listing**
-  - ⭕ **Analyze structural reasons behind diffs first**
-- **Verify information source reliability**
-  - ❌ **Technical documentation blind faith**
-  - ⭕ **Always suspect discrepancies with actual behavior**
-- **Expand solution scope**
-  - ❌ **Localized problem solving**
-  - ⭕ **Include prevention strategies for similar issues**
+- Set appropriate investigation focus
+  - ❌ Fixating on surface errors
+  - ⭕ Draw complete architecture diagram in first 15 minutes
+- Diversify investigation approaches
+  - ❌ Linear investigation
+  - ⭕ Verify minimum 3 hypotheses in parallel
+- Understand the essence of configuration differences
+  - ❌ Configuration diff listing
+  - ⭕ Analyze structural reasons behind diffs first
+- Verify information source reliability
+  - ❌ Technical documentation blind faith
+  - ⭕ Always suspect discrepancies with actual behavior
+- Expand solution scope
+  - ❌ Localized problem solving
+  - ⭕ Include prevention strategies for similar issues
 
 #### Effective Presentation of Investigation Results
 
-- **Conclusion first** - Clearly state causes and solutions at the beginning
-- **Structure options** - Present comparisons including pros and cons
-- **Layer technical details** - Organize information from overview to details
-- **Clarify next actions** - Explicitly state points requiring user judgment
+- Conclusion first - Clearly state causes and solutions at the beginning
+- Structure options - Present comparisons including pros and cons
+- Layer technical details - Organize information from overview to details
+- Clarify next actions - Explicitly state points requiring user judgment
 
 #### User Collaboration Patterns
 
-- **Response to thorough investigation requests** - Use parallel investigation for comprehensive information gathering on complex problems
-- **Decision support** - Organize technical options from business impact perspective
-- **Progress visualization** - Make investigation and work processes transparent using TodoWrite
+- Response to thorough investigation requests - Use parallel investigation for comprehensive information gathering on complex problems
+- Decision support - Organize technical options from business impact perspective
+- Progress visualization - Make investigation and work processes transparent using TodoWrite
 
 ## Instructions for AI Agents
 
@@ -159,11 +159,11 @@ graph TD
 
 ### Implementation Process
 
-1. **Understand** - Grasp existing code and domain knowledge
-2. **Design** - Clarify change locations and impact scope
-3. **Implement** - Make it work with minimal changes
-4. **Verify** - Confirm operation and add tests
-5. **Improve** - Enhance quality through refactoring
+1. Understand - Grasp existing code and domain knowledge
+2. Design - Clarify change locations and impact scope
+3. Implement - Make it work with minimal changes
+4. Verify - Confirm operation and add tests
+5. Improve - Enhance quality through refactoring
 
 ### Quality Criteria
 
@@ -220,9 +220,9 @@ graph TD
 
 ### Concrete yet Natural Language
 
-- **Avoid abstract rhetoric** - Don't use expressions that don't lead to action
-- **Use actionable expressions** - Make clear what readers should do
-- **Include measurable criteria** - Provide specificity that removes guesswork
+- Avoid abstract rhetoric and use concise, actionable expressions - Make clear what readers should do in one sentence
+- Avoid overuse of markup like bold emphasis, maintain simple plain text expression - Visual noise reduces readability
+- Include measurable criteria like numbers and deadlines - Eliminate ambiguity to prevent misunderstandings between readers
 
 ### Good and Bad Examples
 
