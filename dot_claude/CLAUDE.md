@@ -126,8 +126,9 @@ graph TD
 #### MUST: Always execute these
 
 - Present multiple proposals (minimum 3)
-- Create proposals within 50-60 characters
+- Create proposals in English within 50-60 characters
 - Express concisely yet information-rich
+- Follow Conventional Commits format (e.g. `type(scope): description`)
 
 #### IMPORTANT: Always keep in mind
 
