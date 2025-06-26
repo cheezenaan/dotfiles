@@ -21,7 +21,7 @@ zstyle ':completion:*:warnings' format $'\033[1;31mno matches found\033[0m'    #
 # プロセスリスト色分け: PID(青)、プロセス名(デフォルト)、引数(太字)
 typeset -g PROCESS_LIST_COLORS='=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
 zstyle ':completion:*:*:kill:*:processes' list-colors $PROCESS_LIST_COLORS
-zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm,cmd -w -w"
+zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,comm,cmd -w"
 
 # ファイル補完の改善（最近変更されたファイルを優先）
 zstyle ':completion:*:*:*:*:files' sort 'modification'
@@ -49,6 +49,9 @@ zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview 'git log --oneline --graph
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache"
 
+# キャッシュ容量制御（デフォルト100M、環境変数で調整可能）
+typeset -g ZSH_CACHE_MAX_SIZE=${ZSH_CACHE_MAX_SIZE:-100M}
+
 # 重いコマンドのキャッシュポリシー設定
 zstyle ':completion:*:*:docker:*' cache-policy _docker_cache_policy
 zstyle ':completion:*:*:docker-compose:*' cache-policy _docker_cache_policy
@@ -58,13 +61,13 @@ zstyle ':completion:*:*:aws:*' cache-policy _aws_cache_policy
 function _docker_cache_policy() {
   local -a oldp
   oldp=( "$1"(Nmh+1) )  # 1時間でキャッシュ無効化
-  return $#oldp
+  return $#oldp  # 0=キャッシュ有効(新しい), 1=キャッシュ無効(古い)
 }
 
 function _aws_cache_policy() {
   local -a oldp
   oldp=( "$1"(Nmh+24) )  # 24時間でキャッシュ無効化
-  return $#oldp
+  return $#oldp  # 0=キャッシュ有効(新しい), 1=キャッシュ無効(古い)
 }
 
 # キャッシュディレクトリの作成
@@ -82,7 +85,7 @@ if command -v docker &>/dev/null && command -v brew &>/dev/null; then
   typeset docker_comp="$comp_dir/_docker"
   
   if [[ ! -f $docker_comp ]] || [[ $docker_comp -ot $(which docker) ]]; then
-    typeset tmp_comp=$(mktemp)
+    typeset tmp_comp=$(mktemp "${TMPDIR:-/tmp}/docker_comp.$$")
     if docker completion zsh > "$tmp_comp" 2>/dev/null; then
       mv "$tmp_comp" "$docker_comp"
     else
