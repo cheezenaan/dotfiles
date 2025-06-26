@@ -1,6 +1,9 @@
 # Homebrew のサイト関数を有効化（公式補完を一括取得）
 if type brew &>/dev/null; then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+  HOMEBREW_SITE_FUNCTIONS="$(brew --prefix)/share/zsh/site-functions"
+  if [[ ":${FPATH}:" != *":${HOMEBREW_SITE_FUNCTIONS}:"* ]]; then
+    FPATH="${HOMEBREW_SITE_FUNCTIONS}:${FPATH}"
+  fi
 fi
 
 # Initialize completion system
