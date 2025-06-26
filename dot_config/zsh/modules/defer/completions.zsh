@@ -29,15 +29,18 @@ zstyle ':completion:*:*:*:*:globbed-files' sort 'modification'
 # Use ls-colors for file coloring
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
-# fzf-tabの動作調整（候補数に関係なくfzf-tabを使用）
+# fzf-tabの基本設定
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:*' single-group ''
+zstyle ':fzf-tab:*' fzf-flags --height=50% --preview-window=right:50%:wrap
 
-# Preview directory contents
+# プレビュー設定
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -la $realpath'
+zstyle ':fzf-tab:complete:kill:*' fzf-preview 'ps -f -p $word 2>/dev/null || echo "プロセス情報が取得できません"'
 
 # Git補完のプレビュー設定
 zstyle ':fzf-tab:complete:git-switch:*' fzf-preview 'git log --oneline --graph --date=short --pretty="format:%C(auto)%h %d %s %C(green)(%cr)" ${(Q)word}'
+zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview 'git log --oneline --graph --date=short --pretty="format:%C(auto)%h %d %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)" ${(Q)word}'
 
 # === パフォーマンス最適化（キャッシュ設定） ===
 # 基本キャッシュ設定
