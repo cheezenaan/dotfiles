@@ -66,10 +66,10 @@ function _aws_cache_policy() {
 }
 
 # キャッシュディレクトリの作成
-() {
-  local cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache"
-  [[ -d $cache_dir ]] || mkdir -p $cache_dir
-}
+local cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache"
+if [[ ! -d $cache_dir ]]; then
+  mkdir -p $cache_dir
+fi
 
 # === 個別ツール補完設定 ===
 # Homebrew site-functionsで対応されていないツールの補完
