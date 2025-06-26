@@ -1,3 +1,8 @@
+# Homebrew のサイト関数を有効化（公式補完を一括取得）
+if type brew &>/dev/null; then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
+
 # Initialize completion system
 autoload -U compinit; compinit
 
