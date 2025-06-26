@@ -66,7 +66,7 @@ function _aws_cache_policy() {
 }
 
 # キャッシュディレクトリの作成
-local cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache"
+typeset cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache"
 if [[ ! -d $cache_dir ]]; then
   mkdir -p $cache_dir
 fi
@@ -76,8 +76,8 @@ fi
 
 # Docker補完の設定
 if command -v docker &>/dev/null && type brew &>/dev/null; then
-  local comp_dir="$(brew --prefix)/share/zsh/site-functions"
-  local docker_comp="$comp_dir/_docker"
+  typeset comp_dir="$(brew --prefix)/share/zsh/site-functions"
+  typeset docker_comp="$comp_dir/_docker"
   
   if [[ ! -f $docker_comp ]] || [[ $docker_comp -ot $(which docker) ]]; then
     docker completion zsh > $docker_comp 2>/dev/null
