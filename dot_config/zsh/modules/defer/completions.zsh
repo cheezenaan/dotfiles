@@ -13,7 +13,7 @@ zstyle ':completion:*' rehash true
 # === カテゴリ別の色分けとフォーマット（数字コード使用） ===
 # 数字ベースのANSI色コードで確実に色分け
 zstyle ':completion:*:descriptions' format $'\033[1;32m[%d]\033[0m'     # 太字緑色
-zstyle ':completion:*:corrections' format $'\033[1;33m%d (errors: %e)\033[0m'  # 太字黄色  
+zstyle ':completion:*:corrections' format $'\033[1;33m%d (errors: %e)\033[0m'  # 太字黄色
 zstyle ':completion:*:messages' format $'\033[1;35m%d\033[0m'          # 太字マゼンタ
 zstyle ':completion:*:warnings' format $'\033[1;31mno matches found\033[0m'    # 太字赤色
 
