@@ -37,9 +37,10 @@ github = "zsh-users/zsh-history-substring-search"
 
 # --- fzf Integration ---
 # fzf tab completion (Replaces default tab completion, needs sourcing)
+# deferで遅延読み込み（Homebrew補完の後に初期化）
 [plugins.fzf-tab]
 github = "Aloxaf/fzf-tab"
-apply = ["source"]
+apply = ["defer"]
 
 # fzf-git integration (git operations with fzf)
 [plugins.fzf-git]
