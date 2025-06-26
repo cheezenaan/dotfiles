@@ -84,7 +84,7 @@ if command -v docker &>/dev/null && command -v brew &>/dev/null; then
   typeset comp_dir="$(brew --prefix)/share/zsh/site-functions"
   typeset docker_comp="$comp_dir/_docker"
   
-  if [[ ! -f $docker_comp ]] || [[ $docker_comp -ot $(which docker) ]]; then
+  if [[ ! -f $docker_comp ]] || [[ $docker_comp -ot $(command -v docker) ]]; then
     typeset tmp_comp=$(mktemp "${TMPDIR:-/tmp}/docker_comp.$$")
     if docker completion zsh > "$tmp_comp" 2>/dev/null; then
       mv "$tmp_comp" "$docker_comp"
