@@ -71,4 +71,17 @@ function _aws_cache_policy() {
   [[ -d $cache_dir ]] || mkdir -p $cache_dir
 }
 
+# === 個別ツール補完設定 ===
+# Homebrew site-functionsで対応されていないツールの補完
+
+# Docker補完の設定
+if command -v docker &>/dev/null && type brew &>/dev/null; then
+  local comp_dir="$(brew --prefix)/share/zsh/site-functions"
+  local docker_comp="$comp_dir/_docker"
+  
+  if [[ ! -f $docker_comp ]] || [[ $docker_comp -ot $(which docker) ]]; then
+    docker completion zsh > $docker_comp 2>/dev/null
+  fi
+fi
+
 
