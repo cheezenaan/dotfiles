@@ -28,7 +28,7 @@ zstyle ':completion:*:*:*:*:files' sort 'modification'
 zstyle ':completion:*:*:*:*:globbed-files' sort 'modification'
 
 # === fzf-tab設定 ===
-# Use ls-colors for file coloring
+# ファイル色分け用のLS_COLORS使用
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # fzf-tabの基本設定
@@ -58,15 +58,19 @@ zstyle ':completion:*:*:docker-compose:*' cache-policy _docker_cache_policy
 zstyle ':completion:*:*:aws:*' cache-policy _aws_cache_policy
 
 # キャッシュポリシー関数の実装
+# キャッシュ有効期限の定数
+typeset -gr DOCKER_CACHE_HOURS=1
+typeset -gr AWS_CACHE_HOURS=24
+
 function _docker_cache_policy() {
   local -a oldp
-  oldp=( "$1"(Nmh+1) )  # 1時間でキャッシュ無効化
+  oldp=( "$1"(Nmh+$DOCKER_CACHE_HOURS) )  # 1時間でキャッシュ無効化
   return $#oldp  # 0=キャッシュ有効(新しい), 1=キャッシュ無効(古い)
 }
 
 function _aws_cache_policy() {
   local -a oldp
-  oldp=( "$1"(Nmh+24) )  # 24時間でキャッシュ無効化
+  oldp=( "$1"(Nmh+$AWS_CACHE_HOURS) )  # 24時間でキャッシュ無効化
   return $#oldp  # 0=キャッシュ有効(新しい), 1=キャッシュ無効(古い)
 }
 
@@ -79,7 +83,7 @@ function _cleanup_completion_cache() {
 }
 
 # キャッシュディレクトリの作成
-typeset cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache"
+typeset -g cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache"
 if [[ ! -d $cache_dir ]]; then
   mkdir -p $cache_dir
 fi
