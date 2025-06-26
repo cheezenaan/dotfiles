@@ -70,10 +70,23 @@ function _aws_cache_policy() {
   return $#oldp  # 0=キャッシュ有効(新しい), 1=キャッシュ無効(古い)
 }
 
+# キャッシュサイズ管理（定期的なクリーンアップ）
+function _cleanup_completion_cache() {
+  local cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache"
+  if [[ -d $cache_dir ]]; then
+    find "$cache_dir" -type f -atime +7 -delete 2>/dev/null
+  fi
+}
+
 # キャッシュディレクトリの作成
 typeset cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache"
 if [[ ! -d $cache_dir ]]; then
   mkdir -p $cache_dir
+fi
+
+# セッション開始時に実行（低頻度・10%の確率）
+if (( RANDOM % 10 == 0 )); then
+  _cleanup_completion_cache
 fi
 
 # === 個別ツール補完設定 ===
