@@ -45,9 +45,12 @@ zstyle ':fzf-tab:complete:git-switch:*' fzf-preview 'git log --oneline --graph -
 zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview 'git log --oneline --graph --date=short --pretty="format:%C(auto)%h %d %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)" ${(Q)word} 2>/dev/null || echo "ブランチ情報を取得できません"'
 
 # === パフォーマンス最適化（キャッシュ設定） ===
+# キャッシュディレクトリパスの一元化
+typeset -gr ZSH_COMPLETION_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache"
+
 # 基本キャッシュ設定
 zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache"
+zstyle ':completion::complete:*' cache-path "$ZSH_COMPLETION_CACHE_DIR"
 
 # キャッシュ容量制御（デフォルト100M、環境変数で調整可能）
 typeset -g ZSH_CACHE_MAX_SIZE=${ZSH_CACHE_MAX_SIZE:-100M}
@@ -76,16 +79,14 @@ function _aws_cache_policy() {
 
 # キャッシュサイズ管理（定期的なクリーンアップ）
 function _cleanup_completion_cache() {
-  local cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache"
-  if [[ -d $cache_dir ]]; then
-    find "$cache_dir" -type f -atime +7 -delete 2>/dev/null
+  if [[ -d $ZSH_COMPLETION_CACHE_DIR ]]; then
+    find "$ZSH_COMPLETION_CACHE_DIR" -type f -atime +7 -delete 2>/dev/null
   fi
 }
 
 # キャッシュディレクトリの作成
-typeset -g cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache"
-if [[ ! -d $cache_dir ]]; then
-  mkdir -p $cache_dir
+if [[ ! -d $ZSH_COMPLETION_CACHE_DIR ]]; then
+  mkdir -p $ZSH_COMPLETION_CACHE_DIR
 fi
 
 # セッション開始時に実行（低頻度・10%の確率）
