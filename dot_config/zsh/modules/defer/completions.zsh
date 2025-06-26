@@ -3,24 +3,39 @@
 zstyle ':completion:*' matcher-list '' 'r:|[._-]=* r:|=*'
 
 # === 視覚的改善 ===
-# 補完メニューの見た目
-zstyle ':completion:*' menu select=2
+# 補完メニューの基本設定（fzf-tabとの統合）
 zstyle ':completion:*' list-separator '  →  '
 zstyle ':completion:*' auto-description 'specify: %d'
 
 # 補完の再ハッシュを有効化（新しいコマンドを即座に認識）
 zstyle ':completion:*' rehash true
 
+# === カテゴリ別の色分けとフォーマット（数字コード使用） ===
+# 数字ベースのANSI色コードで確実に色分け
+zstyle ':completion:*:descriptions' format $'\033[1;32m[%d]\033[0m'     # 太字緑色
+zstyle ':completion:*:corrections' format $'\033[1;33m%d (errors: %e)\033[0m'  # 太字黄色  
+zstyle ':completion:*:messages' format $'\033[1;35m%d\033[0m'          # 太字マゼンタ
+zstyle ':completion:*:warnings' format $'\033[1;31mno matches found\033[0m'    # 太字赤色
+
+# プロセス表示の改善
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm,cmd -w -w"
+
+# ファイル補完の改善（最近変更されたファイルを優先）
+zstyle ':completion:*:*:*:*:files' sort 'modification'
+zstyle ':completion:*:*:*:*:globbed-files' sort 'modification'
+
 # === fzf-tab設定 ===
-# Set descriptions format to enable group support
-zstyle ':completion:*:descriptions' format '[%d]'
 # Use ls-colors for file coloring
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
-# fzf-tab統合設定
-# 2個以上の候補でfzf-tab、1個以下で通常補完
-zstyle ':completion:*' menu select=2
+# fzf-tabの動作調整（候補数に関係なくfzf-tabを使用）
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:*' single-group ''
 
 # Preview directory contents
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -la $realpath'
+
+# Git補完のプレビュー設定
+zstyle ':fzf-tab:complete:git-switch:*' fzf-preview 'git log --oneline --graph --date=short --pretty="format:%C(auto)%h %d %s %C(green)(%cr)" ${(Q)word}'
 
