@@ -58,13 +58,13 @@ zstyle ':completion:*:*:aws:*' cache-policy _aws_cache_policy
 function _docker_cache_policy() {
   local -a oldp
   oldp=( "$1"(Nmh+1) )  # 1時間でキャッシュ無効化
-  (( $#oldp ))
+  return $#oldp
 }
 
 function _aws_cache_policy() {
   local -a oldp
   oldp=( "$1"(Nmh+24) )  # 24時間でキャッシュ無効化
-  (( $#oldp ))
+  return $#oldp
 }
 
 # キャッシュディレクトリの作成
