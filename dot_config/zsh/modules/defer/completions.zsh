@@ -41,8 +41,8 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -la $realpath'
 zstyle ':fzf-tab:complete:kill:*' fzf-preview 'ps -f -p $word 2>/dev/null || echo "プロセス情報が取得できません"'
 
 # Git補完のプレビュー設定
-zstyle ':fzf-tab:complete:git-switch:*' fzf-preview 'git log --oneline --graph --date=short --pretty="format:%C(auto)%h %d %s %C(green)(%cr)" ${(Q)word}'
-zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview 'git log --oneline --graph --date=short --pretty="format:%C(auto)%h %d %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)" ${(Q)word}'
+zstyle ':fzf-tab:complete:git-switch:*' fzf-preview 'git log --oneline --graph --date=short --pretty="format:%C(auto)%h %d %s %C(green)(%cr)" ${(Q)word} 2>/dev/null || echo "ブランチ情報を取得できません"'
+zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview 'git log --oneline --graph --date=short --pretty="format:%C(auto)%h %d %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)" ${(Q)word} 2>/dev/null || echo "ブランチ情報を取得できません"'
 
 # === パフォーマンス最適化（キャッシュ設定） ===
 # 基本キャッシュ設定
