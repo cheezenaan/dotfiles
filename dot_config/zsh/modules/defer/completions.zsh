@@ -39,3 +39,32 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -la $realpath'
 # Git補完のプレビュー設定
 zstyle ':fzf-tab:complete:git-switch:*' fzf-preview 'git log --oneline --graph --date=short --pretty="format:%C(auto)%h %d %s %C(green)(%cr)" ${(Q)word}'
 
+# === パフォーマンス最適化（キャッシュ設定） ===
+# 基本キャッシュ設定
+zstyle ':completion::complete:*' use-cache on
+zstyle ':completion::complete:*' cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache"
+
+# 重いコマンドのキャッシュポリシー設定
+zstyle ':completion:*:*:docker:*' cache-policy _docker_cache_policy
+zstyle ':completion:*:*:docker-compose:*' cache-policy _docker_cache_policy
+zstyle ':completion:*:*:aws:*' cache-policy _aws_cache_policy
+
+# キャッシュポリシー関数の実装
+function _docker_cache_policy() {
+  local -a oldp
+  oldp=( "$1"(Nmh+1) )  # 1時間でキャッシュ無効化
+  (( $#oldp ))
+}
+
+function _aws_cache_policy() {
+  local -a oldp
+  oldp=( "$1"(Nmh+24) )  # 24時間でキャッシュ無効化
+  (( $#oldp ))
+}
+
+# キャッシュディレクトリの作成
+() {
+  local cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache"
+  [[ -d $cache_dir ]] || mkdir -p $cache_dir
+}
+
