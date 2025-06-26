@@ -18,7 +18,9 @@ zstyle ':completion:*:messages' format $'\033[1;35m%d\033[0m'          # 太字�
 zstyle ':completion:*:warnings' format $'\033[1;31mno matches found\033[0m'    # 太字赤色
 
 # プロセス表示の改善
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+# プロセスリスト色分け: PID(青)、プロセス名(デフォルト)、引数(太字)
+typeset -g PROCESS_LIST_COLORS='=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+zstyle ':completion:*:*:kill:*:processes' list-colors $PROCESS_LIST_COLORS
 zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm,cmd -w -w"
 
 # ファイル補完の改善（最近変更されたファイルを優先）
