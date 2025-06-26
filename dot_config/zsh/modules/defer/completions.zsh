@@ -80,7 +80,12 @@ if command -v docker &>/dev/null && type brew &>/dev/null; then
   typeset docker_comp="$comp_dir/_docker"
   
   if [[ ! -f $docker_comp ]] || [[ $docker_comp -ot $(which docker) ]]; then
-    docker completion zsh > $docker_comp 2>/dev/null
+    typeset tmp_comp=$(mktemp)
+    if docker completion zsh > "$tmp_comp" 2>/dev/null; then
+      mv "$tmp_comp" "$docker_comp"
+    else
+      rm -f "$tmp_comp"
+    fi
   fi
 fi
 
