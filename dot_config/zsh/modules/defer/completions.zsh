@@ -75,7 +75,7 @@ fi
 # Homebrew site-functionsで対応されていないツールの補完
 
 # Docker補完の設定
-if command -v docker &>/dev/null && type brew &>/dev/null; then
+if command -v docker &>/dev/null && command -v brew &>/dev/null; then
   typeset comp_dir="$(brew --prefix)/share/zsh/site-functions"
   typeset docker_comp="$comp_dir/_docker"
   
