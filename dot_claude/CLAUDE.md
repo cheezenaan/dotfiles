@@ -111,6 +111,7 @@ Configuration investigation checklist:
 - Always understand structure and intent of existing code before changes
 - Always implement in small, incremental steps
 - Always present verification methods after implementation
+- Insert half-width spaces before and after alphanumeric characters when creating Japanese documents
 
 #### IMPORTANT: Always keep in mind
 
@@ -223,6 +224,7 @@ Configuration investigation checklist:
 - Avoid abstract rhetoric and use concise, actionable expressions - Make clear what readers should do in one sentence
 - Avoid overuse of markup like bold emphasis, maintain simple plain text expression - Visual noise reduces readability
 - Include measurable criteria like numbers and deadlines - Eliminate ambiguity to prevent misunderstandings between readers
+- When Japanese and alphanumeric characters are mixed, insert half-width spaces before and after - Improve readability and clarify visual separation
 
 ### Good and Bad Examples
 
@@ -240,6 +242,14 @@ Configuration investigation checklist:
 
 ❌ `fix: Update code` - Unclear what was fixed  
 ⭕ `fix: Resolve user login timeout after 5 minutes` - Clear problem and solution
+
+#### Japanese and Alphanumeric Mixed Expressions
+
+❌ `React`コンポーネントの設計で`useState`フックを活用する - No spaces, hard to read  
+⭕ `React` コンポーネントの設計で `useState` フックを活用する - With spaces, easy to read
+
+❌ データベースの`PostgreSQL`接続を`Docker`環境で構築する  
+⭕ データベースの `PostgreSQL` 接続を `Docker` 環境で構築する
 
 ## Document Self-Improvement Process
 
