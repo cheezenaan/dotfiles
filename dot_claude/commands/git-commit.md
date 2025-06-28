@@ -5,7 +5,7 @@
 ## 使用方法
 
 ```
-/git-commit [ユーザーの提案メッセージ]
+/git-commit [user-provided message]
 ``
 
 - 引数あり: ユーザーの提案をベースに改善・検証したメッセージを提案

@@ -5,10 +5,10 @@
 ## 使用方法
 
 ```
-/dump-session-log <task_description>
+/dump-session-log [task_description]
 ```
 
-- `task_description`: [optional] 作業内容の簡潔な説明（ファイル名に使用）
+- `task_description`: (optional) 作業内容の簡潔な説明（ファイル名に使用）
   - ユーザーから `task_description` の入力がない場合､ `tmp/_logs` ディレクトリ内のログファイルから推測する
 
 ## 実行処理
