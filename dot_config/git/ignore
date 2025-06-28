@@ -16,3 +16,6 @@
 
 ## for local memo, settings, etc.
 **/.tmp/**/*.md
+
+**/.claude/settings.local.json
+**/CLAUDE.local.md
