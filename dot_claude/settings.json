@@ -1,65 +1,36 @@
 {
   "model": "sonnet",
   "permissions": {
-    "allow": [
-      "Read(**)",
-      "Write(**)",
-      "Edit(**)",
-      "MultiEdit(**)",
-      "Glob(**)",
-      "Grep(**)",
-      "LS(**)",
-      "Bash(npm run lint*)",
-      "Bash(npm run test*)",
-      "Bash(npm run build*)",
-      "Bash(npm run dev*)",
-      "Bash(uv run ruff*)",
-      "Bash(python -m pytest*)",
-      "Bash(go test*)",
-      "Bash(go build*)",
-      "Bash(bundle exec rspec*)",
-      "Bash(git status)",
-      "Bash(git diff*)",
-      "Bash(git log*)",
-      "Bash(git branch*)",
-      "Bash(git checkout*)",
-      "Bash(ls*)",
-      "Bash(pwd)",
-      "Bash(cd*)",
-      "Bash(mkdir*)",
-      "Bash(touch*)",
-      "Bash(echo*)",
-      "Bash(cat*)",
-      "Bash(head*)",
-      "Bash(tail*)",
-      "Task(**)",
-      "TodoRead(**)",
-      "TodoWrite(**)",
-      "WebFetch(**)",
-      "WebSearch(**)"
-    ],
+    "allow": [],
     "deny": [
+      // Dangerous commands
+      "Bash(sudo:*)",
+      "Bash(rm:*)",
+      "Bash(rm -rf:*)",
+      // Unintended git operations
       "Bash(git commit*)",
       "Bash(git push*)",
-      "Bash(git pull*)",
-      "Bash(git merge*)",
-      "Bash(git rebase*)",
-      "Bash(rm*)",
-      "Bash(rmdir*)",
-      "Bash(mv* /dev/null)",
-      "Bash(>*)",
-      "Bash(sudo*)",
-      "Bash(curl*)",
-      "Bash(wget*)",
-      "Bash(npm publish*)",
-      "Bash(pip install*)",
-      "Bash(uv add*)",
-      "Bash(bundle install*)",
-      "Bash(go mod*)"
+      "Bash(git push:*)",
+      "Bash(git commit:*)",
+      "Bash(git reset:*)",
+      "Bash(git rebase:*)",
+      // Access to sensitive information
+      "Read(.env.*)",
+      "Read(id_rsa)",
+      "Read(id_ed25519)",
+      "Read(**/*token*)",
+      "Read(**/*key*)",
+      "Write(.env*)",
+      "Write(**/secrets/**)",
+      // Unnecessary communication with external services
+      "Bash(curl:*)",
+      "Bash(wget:*)",
+      "Bash(nc:*)"
     ]
   },
   "env": {
     "CLAUDE_CODE_ENABLE_TELEMETRY": "0"
   },
-  "includeCoAuthoredBy": false
+  "includeCoAuthoredBy": false,
+  "cleanupPeriodDays": 90
 }
