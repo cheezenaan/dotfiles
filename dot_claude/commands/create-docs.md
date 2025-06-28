@@ -59,13 +59,27 @@
 - 完全に同一の内容は除去
 - タイムスタンプや議論の経緯は保持
 
+## エラーハンドリング
+
+- **description 自動推測失敗時**: デフォルト名 `spec_untitled.md` を使用
+  - ファイル重複時は末尾に連番を付加（`spec_untitled_01.md`, `spec_untitled_02.md`）
+- **git コマンド失敗時**: 現在のディレクトリ `$(pwd)` にフォールバック
+- **テンプレート不在時**: エラーメッセージを表示して終了
+- **書き込み権限不足時**: エラーメッセージを表示
+
+## セキュリティ考慮事項
+
+- description パラメータは英数字・ハイフン・アンダースコアのみ許可
+- パストラバーサル攻撃を防ぐため、相対パスは禁止
+
 ## 使用例
 
 ```
 /create-docs authentication_system
-# → .tmp/docs/authentication_system.md が生成される
+# → .tmp/docs/spec_authentication_system.md が生成される
 
 /create-docs
 # → セッション内容から "user_management" を推測
-# → .tmp/docs/user_management.md が生成される
+# → .tmp/docs/spec_user_management.md が生成される
+# → 推測失敗時は .tmp/docs/spec_untitled.md が生成される
 ```
