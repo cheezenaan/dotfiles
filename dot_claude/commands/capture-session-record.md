@@ -8,7 +8,7 @@ Generate comprehensive session records with technical insights and emotional ref
    - Detect working directory type (git repository or standard directory)
    - Verify write permissions for target output directory
    - Check template file availability at ~/.claude/templates/02.LOG.md
-   - Validate system datetime accessibility for filename generation
+   - Validate system datetime accessibility for filename generation (use `date "+%Y-%m-%d %H:%M"` to verify current time)
    - Confirm session context availability for comprehensive analysis
 
 2. **Session Analysis and Content Extraction**
