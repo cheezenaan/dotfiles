@@ -29,7 +29,10 @@
     ]
   },
   "env": {
-    "CLAUDE_CODE_ENABLE_TELEMETRY": "0"
+    // Disable telemetry
+    "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
+    // Always use 'ultra think'
+    "MAX_THINKING_TOKENS": "31999"
   },
   "includeCoAuthoredBy": false,
   "cleanupPeriodDays": 90
