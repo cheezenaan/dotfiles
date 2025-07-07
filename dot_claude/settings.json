@@ -1,20 +1,18 @@
 {
   "model": "sonnet",
+  "defaultMode": "plan",
+  "installationType": "npm-global",
   "permissions": {
     "allow": [],
     "deny": [
-      // Dangerous commands
       "Bash(sudo:*)",
       "Bash(rm:*)",
       "Bash(rm -rf:*)",
-      // Unintended git operations
       "Bash(git commit*)",
-      "Bash(git push*)",
       "Bash(git push:*)",
       "Bash(git commit:*)",
       "Bash(git reset:*)",
       "Bash(git rebase:*)",
-      // Access to sensitive information
       "Read(.env.*)",
       "Read(id_rsa)",
       "Read(id_ed25519)",
@@ -22,15 +20,39 @@
       "Read(**/*key*)",
       "Write(.env*)",
       "Write(**/secrets/**)",
-      // Unnecessary communication with external services
       "Bash(curl:*)",
       "Bash(wget:*)",
       "Bash(nc:*)"
     ]
   },
   "env": {
-    "CLAUDE_CODE_ENABLE_TELEMETRY": "0"
+    "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
+    "MAX_THINKING_TOKENS": "31999"
   },
   "includeCoAuthoredBy": false,
-  "cleanupPeriodDays": 90
+  "cleanupPeriodDays": 90,
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "terminal-notifier -title 'Claude Code' -message 'Task completed' -sound default"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "terminal-notifier -title 'Claude Code' -message 'Action required' -sound default"
+          }
+        ]
+      }
+    ]
+  }
 }

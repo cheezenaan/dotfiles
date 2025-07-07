@@ -7,5 +7,9 @@ not_found_auto_install = true
 idiomatic_version_file_enable_tools = ["python", "ruby"]
 
 [tools]
+# Package managers
 node = "latest"
 uv = "latest"
+
+# npm packages
+"npm:@anthropic-ai/claude-code" = "latest"

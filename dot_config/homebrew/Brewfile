@@ -25,6 +25,9 @@ cask "wezterm"
 
 brew "direnv"
 
+# Desktop notifications
+brew "terminal-notifier"
+
 # Additional fonts for terminal, editor, etc.
 cask "font-plemol-jp"
 cask "font-hackgen"
