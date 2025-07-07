@@ -1,6 +1,7 @@
 {
   "model": "sonnet",
   "defaultMode": "plan",
+  "installationType": "npm-global",
   "permissions": {
     "allow": [],
     "deny": [
