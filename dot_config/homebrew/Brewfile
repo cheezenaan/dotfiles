@@ -32,3 +32,6 @@ brew "terminal-notifier"
 cask "font-plemol-jp"
 cask "font-hackgen"
 cask "font-udev-gothic"
+
+# Zellij
+brew "zellij"

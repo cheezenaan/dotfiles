@@ -1,0 +1,26 @@
+// 基本設定
+default_shell "zsh"
+theme "nord"
+simplified_ui true
+pane_frames false
+
+// macOS 向けクリップボード設定
+copy_command "pbcopy"
+copy_on_select false
+
+// Nord テーマ定義
+themes {
+    nord {
+        fg "#D8DEE9"
+        bg "#2E3440"
+        red "#BF616A"
+        green "#A3BE8C"
+        yellow "#EBCB8B"
+        blue "#81A1C1"
+        magenta "#B48EAD"
+        orange "#D08770"
+        cyan "#88C0D0"
+        black "#3B4252"
+        white "#E5E9F0"
+    }
+}
