@@ -8,13 +8,13 @@ config.automatically_reload_config = true
 config.color_scheme = 'Nord (Gogh)'
 
 config.font = wezterm.font_with_fallback({
-  'UDEV Gothic 35',
+  'UDEV Gothic 35 Nerd Font',
   'PlemolJP Console35',
   'Menlo',
   'Monaco',
   'monospace',
 }, {weight='Regular'})
-config.font_size = 12.0
+config.font_size = 14.0
 config.use_ime = true
 
 config.window_padding = {
