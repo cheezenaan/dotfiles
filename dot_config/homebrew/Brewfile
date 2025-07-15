@@ -29,9 +29,13 @@ brew "direnv"
 brew "terminal-notifier"
 
 # Additional fonts for terminal, editor, etc.
+
 cask "font-plemol-jp"
 cask "font-hackgen"
 cask "font-udev-gothic"
 
 # Zellij
 brew "zellij"
+
+# Window manager
+cask "alt-tab"
