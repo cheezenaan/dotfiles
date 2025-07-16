@@ -1,8 +1,7 @@
 {
   "model": "sonnet",
-  "defaultMode": "plan",
-  "installationType": "npm-global",
   "permissions": {
+    "defaultMode": "plan",
     "allow": [],
     "deny": [
       "Bash(sudo:*)",
