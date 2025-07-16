@@ -43,3 +43,6 @@ cask "alt-tab"
 # jankyborders
 tap "felixkratz/formulae"
 brew "borders"
+
+# karabiner-elements
+cask "karabiner-elements"

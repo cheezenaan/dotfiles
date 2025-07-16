@@ -5,3 +5,6 @@ settings/
 
 # Personal memo files
 .tmp/**/*.md
+
+# karabiner-elements automatic backups
+.config/karabiner/automatic_backups/
