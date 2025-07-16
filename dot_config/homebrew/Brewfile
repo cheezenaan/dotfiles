@@ -37,5 +37,9 @@ cask "font-udev-gothic"
 # Zellij
 brew "zellij"
 
-# Window manager
+# Alt-tab as window manager
 cask "alt-tab"
+
+# jankyborders
+tap "felixkratz/formulae"
+brew "borders"

@@ -8,12 +8,14 @@ config.automatically_reload_config = true
 config.color_scheme = 'Nord (Gogh)'
 
 config.font = wezterm.font_with_fallback({
-  'UDEV Gothic 35 Nerd Font',
-  'PlemolJP Console35',
+  'UDEV Gothic 35',
+  'PlemolJP35 Console',
   'Menlo',
   'Monaco',
   'monospace',
-}, {weight='Regular'})
+}, {
+  weight='Regular',
+})
 config.font_size = 14.0
 config.use_ime = true
 
