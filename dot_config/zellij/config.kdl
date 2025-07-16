@@ -7,6 +7,7 @@ pane_frames false
 // macOS 向けクリップボード設定
 copy_command "pbcopy"
 copy_on_select false
+mouse_mode false
 
 // Nord テーマ定義
 themes {
