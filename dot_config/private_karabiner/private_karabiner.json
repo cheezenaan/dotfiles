@@ -53,6 +53,7 @@
             ]
           },
           {
+            "description": "Enable hyperkey functionality using caps_lock (after key swap)",
             "manipulators": [
               {
                 "description": "Change caps_lock to command+control+option+shift.",
