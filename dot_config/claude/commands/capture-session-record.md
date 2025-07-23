@@ -7,7 +7,7 @@ Generate comprehensive session records with technical insights and emotional ref
 1. **Prerequisites Verification**
    - Detect working directory type (git repository or standard directory)
    - Verify write permissions for target output directory
-   - Check template file availability at ~/.claude/templates/02.LOG.md
+   - Check template file availability at ~/.config/claude/templates/02.LOG.md
    - Validate system datetime accessibility for filename generation (use `date "+%Y-%m-%d %H:%M"` to verify current time)
    - Confirm session context availability for comprehensive analysis
 
@@ -27,7 +27,7 @@ Generate comprehensive session records with technical insights and emotional ref
    - Create output directory structure if it doesn't exist
    - Generate filename in format: YYYYmmdd_HHmm_description.md
    - Request description from user or intelligently auto-generate from session context
-   - Load template from ~/.claude/templates/02.LOG.md
+   - Load template from ~/.config/claude/templates/02.LOG.md
    - Populate all template sections with extracted and analyzed content
 
 4. **Quality Validation and Enhancement**
@@ -48,7 +48,7 @@ Generate comprehensive session records with technical insights and emotional ref
 
 ## Error Handling Strategy
 
-1. **Primary Path**: Load external template from ~/.claude/templates/02.LOG.md
+1. **Primary Path**: Load external template from ~/.config/claude/templates/02.LOG.md
 2. **Secondary Path**: If template missing, use embedded minimal template with core sections
 3. **Tertiary Path**: If file write fails, output formatted content to stdout
 4. **Final Fallback**: Provide step-by-step manual creation instructions with template structure
