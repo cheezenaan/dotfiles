@@ -49,15 +49,30 @@ jobs:
             - Security implications
             - Test coverage
             
+            Please follow these steps to proceed with PR creation:
+            1.  **Start the review:** 
+              - Use `mcp__github__create_pending_pull_request_review` to initiate a pending review
+            2.  **Check the changes:** 
+              - Use `mcp__github__get_pull_request_diff` to understand code changes and line numbers
+            3.  **Add inline comments:** 
+              - Use `mcp__github__add_pull_request_review_comment_to_pending_review` to add comments for code lines with improvements or concerns
+              - When the fix approach is clear, actively use suggestions
+            4.  **Submit the review:** 
+              - Use `mcp__github__submit_pending_pull_request_review` with event type set to "COMMENT" and submit the review with an overall summary comment
+              - ※Please do not use "REQUEST_CHANGES"
+            
             Please provide inline comments on specific lines of code with categorized feedback:
             - [MUST] Critical issues requiring immediate attention
             - [IMO] Optional suggestions for consideration
             - [nits] Minor style or formatting improvements
-            
-            Include an overall summary of your review.
                         
           # Remove tool restrictions - let Claude use default tools for PR reviews
-          
+          allowed_tools: >
+            mcp__github__create_pending_pull_request_review,
+            mcp__github__add_pull_request_review_comment_to_pending_review,
+            mcp__github__submit_pending_pull_request_review,
+            mcp__github__get_pull_request_diff
+
           # Optional: Skip review for certain conditions
           # if: |
           #   !contains(github.event.pull_request.title, '[skip-review]') &&
