@@ -61,11 +61,14 @@ jobs:
               - Use `mcp__github__submit_pending_pull_request_review` with event type set to "COMMENT" and submit the review with an overall summary comment
               - ※Please do not use "REQUEST_CHANGES"
             
-            Please provide inline comments on specific lines of code with categorized feedback:
-            - [MUST] Critical issues requiring immediate attention
-            - [IMO] Optional suggestions for consideration
-            - [nits] Minor style or formatting improvements
-                        
+            **Inline comment guidelines:**
+            - Please provide inline comments on specific lines of code with categorized feedback:
+              - [MUST] Critical issues requiring immediate attention: bugs, security issues, and mandatory fixes
+              - [IMO] Optional suggestions for consideration: performance, readability, and style improvements
+              - [nits] Minor style or formatting improvements: code style and minor improvements
+            - Please focus on code lines with improvements or concerns
+            - Please include positive feedback and overall evaluation in the summary comment
+
           # Remove tool restrictions - let Claude use default tools for PR reviews
           allowed_tools: >
             mcp__github__create_pending_pull_request_review,
