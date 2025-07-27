@@ -29,6 +29,9 @@ eval "$(mise activate zsh)"
 # Initialize direnv
 eval "$(direnv hook zsh)"
 
+# Initialize Claude Code
+export CLAUDE_CONFIG_DIR="${XDG_CONFIG_HOME}/claude"
+
 # Load local-only settings
 if [[ -f "${ZDOTDIR}/.zshrc.local" ]]; then
   source "${ZDOTDIR}/.zshrc.local"
