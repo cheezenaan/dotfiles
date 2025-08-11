@@ -30,6 +30,10 @@
   },
   "includeCoAuthoredBy": false,
   "cleanupPeriodDays": 90,
+  "statusLine": {
+    "type": "command",
+    "command": "~/.config/claude/statusline.js"
+  },
   "hooks": {
     "Stop": [
       {
