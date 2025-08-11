@@ -55,7 +55,7 @@ jobs:
             2.  **Check the changes:** 
               - Use `mcp__github__get_pull_request_diff` to understand code changes and line numbers
             3.  **Add inline comments:** 
-              - Use `mcp__github__add_pull_request_review_comment_to_pending_review` to add comments for code lines with improvements or concerns
+              - Use `mcp__github__add_comment_to_pending_review` to add comments for code lines with improvements or concerns
               - When the fix approach is clear, actively use suggestions
             4.  **Submit the review:** 
               - Use `mcp__github__submit_pending_pull_request_review` with event type set to "COMMENT" and submit the review with an overall summary comment
@@ -72,9 +72,9 @@ jobs:
           # Remove tool restrictions - let Claude use default tools for PR reviews
           allowed_tools: >
             mcp__github__create_pending_pull_request_review,
-            mcp__github__add_pull_request_review_comment_to_pending_review,
-            mcp__github__submit_pending_pull_request_review,
             mcp__github__get_pull_request_diff
+            mcp__github__add_comment_to_pending_review,
+            mcp__github__submit_pending_pull_request_review,
 
           # Optional: Skip review for certain conditions
           # if: |
