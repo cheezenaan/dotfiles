@@ -65,7 +65,7 @@ const getSessionInfo = filePath =>
         Array.isArray(content) ? content.map(item => (item.text ?? '') + (item.thinking ?? '')).join('') : '';
 
     const parsed = lines.map(parseJsonLine).filter(Boolean);
-    const modelName = parsed.reverse().find(json => json.type === 'assistant')?.message?.model;
+    const modelName = [...parsed].reverse().find(json => json.type === 'assistant')?.message?.model;
     const totalText = parsed.map(json => extractContent(json.message?.content)).join('');
 
     return {
