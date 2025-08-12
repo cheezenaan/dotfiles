@@ -32,7 +32,7 @@
   "cleanupPeriodDays": 90,
   "statusLine": {
     "type": "command",
-    "command": "~/.config/claude/statusline.js"
+    "command": "node ~/.config/claude/statusline.js"
   },
   "hooks": {
     "Stop": [

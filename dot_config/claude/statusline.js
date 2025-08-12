@@ -5,8 +5,20 @@ const path = require('path');
 const os = require('os');
 
 const CONTEXT_LIMIT = 200000;
-const AUTO_COMPACT_LIMIT = Math.floor(CONTEXT_LIMIT * 0.8);
+const AUTO_COMPACT_RATIO = 0.8;
 const COLOR_THRESHOLDS = { WARNING: 50, DANGER: 70 };
+
+const loadPricing = () => {
+  try {
+    const pricingPath = path.join(__dirname, 'pricing.json');
+    if (fs.existsSync(pricingPath)) {
+      const pricingData = JSON.parse(fs.readFileSync(pricingPath, 'utf8'));
+      return pricingData.models;
+    }
+  } catch {
+  }
+  return null;
+};
 
 const colors = {
   reset: '\x1b[0m',
@@ -17,11 +29,16 @@ const colors = {
   dim: '\x1b[2m'
 };
 
-const encodeProjectPath = projectPath => '-' + projectPath.replace(/^\//, '').replace(/[/.]/g, '-');
+const shouldDisplayColors = process.stdout.isTTY && !process.env.NO_COLOR;
+if (!shouldDisplayColors) {
+  Object.keys(colors).forEach(k => { colors[k] = ''; });
+}
+
+const convertProjectPathToDirectoryName = projectPath => '-' + projectPath.replace(/^\//, '').replace(/[/.]/g, '-');
 
 const getSessionTranscriptPath = () => {
   const claudeDir = path.join(os.homedir(), '.config', 'claude');
-  const currentProject = encodeProjectPath(process.cwd());
+  const currentProject = convertProjectPathToDirectoryName(process.cwd());
   const projectDir = path.join(claudeDir, 'projects', currentProject);
 
   try {
@@ -47,7 +64,27 @@ const getSessionTranscriptPath = () => {
   }
 };
 
-const calculateTokens = text => Math.floor(text.length / 4);
+const normalizeModelKey = (name) => name
+  ? name.replace(/-\d{8}$/, '').replace(/-latest$/, '')
+  : name;
+
+const calculateCostFromUsage = (totalUsage, modelName) => {
+  const pricing = loadPricing();
+  if (!pricing) return 0;
+
+  const normalized = normalizeModelKey(modelName);
+  const modelPricing = pricing[modelName] || pricing[normalized];
+  if (!modelPricing) return 0;
+
+  const cost = (
+    (totalUsage.input || 0) * modelPricing.input +
+    (totalUsage.output || 0) * modelPricing.output +
+    (totalUsage.cacheCreate || 0) * modelPricing.cacheCreate +
+    (totalUsage.cacheRead || 0) * modelPricing.cacheRead
+  );
+
+  return cost;
+};
 
 const parseJsonlFile = (filePath, processor) => {
   try {
@@ -57,30 +94,54 @@ const parseJsonlFile = (filePath, processor) => {
   }
 };
 
+const parseSessionMessages = (lines) => {
+  const parseJsonLine = line => { try { return JSON.parse(line); } catch { return null; } };
+  const parsed = lines.map(parseJsonLine).filter(Boolean);
+  return parsed.filter(json => json.type === 'assistant');
+};
+
 const getSessionInfo = filePath =>
   parseJsonlFile(filePath, (lines) => {
-    const parseJsonLine = line => { try { return JSON.parse(line); } catch { return null; } };
-    const extractContent = content =>
-      typeof content === 'string' ? content :
-        Array.isArray(content) ? content.map(item => (item.text ?? '') + (item.thinking ?? '')).join('') : '';
+    const assistantMessages = parseSessionMessages(lines);
 
-    const parsed = lines.map(parseJsonLine).filter(Boolean);
-    const modelName = [...parsed].reverse().find(json => json.type === 'assistant')?.message?.model;
-    const totalText = parsed.map(json => extractContent(json.message?.content)).join('');
+    const latestAssistant = assistantMessages[assistantMessages.length - 1];
+    const modelName = latestAssistant?.message?.model;
+
+    const recentInputTokens = latestAssistant?.message?.usage?.input_tokens || 0;
+
+    const totalUsage = assistantMessages.reduce((usage, message) => {
+      const messageUsage = message.message?.usage;
+      if (messageUsage) {
+        usage.input += messageUsage.input_tokens || 0;
+        usage.output += messageUsage.output_tokens || 0;
+        usage.cacheCreate += messageUsage.cache_creation_input_tokens || 0;
+        usage.cacheRead += messageUsage.cache_read_input_tokens || 0;
+      }
+      return usage;
+    }, { input: 0, output: 0, cacheCreate: 0, cacheRead: 0 });
+
+    const sessionCost = calculateCostFromUsage(totalUsage, modelName);
 
     return {
-      totalTokens: calculateTokens(totalText),
-      modelName
+      recentInputTokens,
+      modelName,
+      sessionCost
     };
-  }) || { totalTokens: 0, modelName: null };
+  }) || { recentInputTokens: 0, modelName: null, sessionCost: 0 };
 
-const getUsageColor = p => [
-  [p < COLOR_THRESHOLDS.WARNING, colors.green],
-  [p < COLOR_THRESHOLDS.DANGER, colors.yellow],
+const getPercentageColor = percentage => [
+  [percentage < COLOR_THRESHOLDS.WARNING, colors.green],
+  [percentage < COLOR_THRESHOLDS.DANGER, colors.yellow],
   [true, colors.red]
 ].find(([condition]) => condition)[1];
 const formatModelName = modelName => modelName?.match(/^claude-([^-]+-\d+)/)?.[1] ?? modelName ?? 'claude';
 const formatTokenCount = count => count >= 1000 ? `${(count / 1000).toFixed(1)}K` : count.toString();
+
+const MODEL_CONTEXT_LIMITS = {
+  'claude-3-5-sonnet': 200000,
+  'claude-sonnet-4': 200000,
+  'claude-opus-4': 200000
+};
 
 const main = () => {
   try {
@@ -92,14 +153,32 @@ const main = () => {
     }
 
     const sessionInfo = getSessionInfo(transcriptPath);
-    const percentage = Math.min((sessionInfo.totalTokens / AUTO_COMPACT_LIMIT) * 100, 100);
-    const usageColor = getUsageColor(percentage);
+    const recentTokens = sessionInfo.recentInputTokens;
 
-    console.log([
-      `${colors.cyan}${formatModelName(sessionInfo.modelName)}${colors.reset}`,
-      `📁 ${colors.dim}${path.basename(process.cwd())}${colors.reset}`,
-      `🔥 ${usageColor}${formatTokenCount(sessionInfo.totalTokens)}/${formatTokenCount(AUTO_COMPACT_LIMIT)} (${usageColor}${percentage.toFixed(1)}%)${colors.reset}`
-    ].join(' │ '));
+    const normalizedModel = normalizeModelKey(sessionInfo.modelName);
+    const contextLimit = MODEL_CONTEXT_LIMITS[normalizedModel] ?? CONTEXT_LIMIT;
+    const autoCompactLimit = Math.floor(contextLimit * AUTO_COMPACT_RATIO);
+
+    const percentage = Math.min((recentTokens / autoCompactLimit) * 100, 100);
+    const usageColor = getPercentageColor(percentage);
+    const remainingTokens = Math.max(autoCompactLimit - recentTokens, 0);
+
+    const displayParts = [];
+
+    if (sessionInfo.modelName) {
+      displayParts.push(`🤖 ${formatModelName(sessionInfo.modelName)}`);
+    }
+
+    if (sessionInfo.sessionCost > 0) {
+      displayParts.push(`💰 $${sessionInfo.sessionCost.toFixed(2)} session`);
+    }
+
+    displayParts.push(`🧠 recent: ${usageColor}${formatTokenCount(recentTokens)}/${formatTokenCount(autoCompactLimit)} (${percentage.toFixed(1)}%)${colors.reset}`);
+
+    const warningColor = getPercentageColor(percentage);
+    displayParts.push(`⚠️  AUTO-COMPACT in ${warningColor}${formatTokenCount(remainingTokens)} tokens${colors.reset}`);
+
+    console.log(displayParts.join(' | '));
 
   } catch (error) {
     console.log(`${colors.red}Error: ${error.message}${colors.reset}`);
