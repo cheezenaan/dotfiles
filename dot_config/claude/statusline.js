@@ -20,6 +20,18 @@ const loadPricing = () => {
   return null;
 };
 
+const getDailyCost = () => {
+  try {
+    const { execSync } = require('child_process');
+    const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+    const result = execSync(`ccusage daily -j -s ${today} -u ${today}`, { encoding: 'utf8' });
+    const data = JSON.parse(result);
+    return data.totals?.totalCost || 0;
+  } catch {
+    return 0;
+  }
+};
+
 const colors = {
   reset: '\x1b[0m',
   green: '\x1b[32m',
@@ -136,6 +148,7 @@ const getPercentageColor = percentage => [
 ].find(([condition]) => condition)[1];
 const formatModelName = modelName => modelName?.match(/^claude-([^-]+-\d+)/)?.[1] ?? modelName ?? 'claude';
 const formatTokenCount = count => count >= 1000 ? `${(count / 1000).toFixed(1)}K` : count.toString();
+const formatTokenCountK = count => `${(count / 1000).toFixed(2)}k`;
 
 const MODEL_CONTEXT_LIMITS = {
   'claude-3-5-sonnet': 200000,
@@ -160,25 +173,36 @@ const main = () => {
     const autoCompactLimit = Math.floor(contextLimit * AUTO_COMPACT_RATIO);
 
     const percentage = Math.min((recentTokens / autoCompactLimit) * 100, 100);
+    const remainPercentage = 100 - percentage;
     const usageColor = getPercentageColor(percentage);
     const remainingTokens = Math.max(autoCompactLimit - recentTokens, 0);
 
+    const dailyCost = getDailyCost();
     const displayParts = [];
 
     if (sessionInfo.modelName) {
       displayParts.push(`🤖 ${formatModelName(sessionInfo.modelName)}`);
     }
 
+    const costDisplay = [];
+    if (dailyCost > 0) {
+      costDisplay.push(`$${dailyCost.toFixed(2)} today`);
+    }
     if (sessionInfo.sessionCost > 0) {
-      displayParts.push(`💰 $${sessionInfo.sessionCost.toFixed(2)} session`);
+      costDisplay.push(`$${sessionInfo.sessionCost.toFixed(2)} session`);
+    }
+    if (costDisplay.length > 0) {
+      displayParts.push(`💰 ${costDisplay.join(' / ')}`);
     }
 
-    displayParts.push(`🧠 recent: ${usageColor}${formatTokenCount(recentTokens)}/${formatTokenCount(autoCompactLimit)} (${percentage.toFixed(1)}%)${colors.reset}`);
-
-    const warningColor = getPercentageColor(percentage);
-    displayParts.push(`⚠️  AUTO-COMPACT in ${warningColor}${formatTokenCount(remainingTokens)} tokens${colors.reset}`);
+    displayParts.push(`🧠 recent: ${usageColor}${formatTokenCountK(recentTokens)} (${formatTokenCountK(recentTokens)}/${formatTokenCountK(autoCompactLimit)})${colors.reset}`);
 
     console.log(displayParts.join(' | '));
+
+    if (percentage >= COLOR_THRESHOLDS.WARNING) {
+      const warningColor = getPercentageColor(percentage);
+      console.log(`⚠️  AUTO-COMPACT in ${warningColor}${formatTokenCount(remainingTokens)} tokens${colors.reset}`);
+    }
 
   } catch (error) {
     console.log(`${colors.red}Error: ${error.message}${colors.reset}`);
