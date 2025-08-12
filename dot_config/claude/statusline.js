@@ -98,8 +98,7 @@ const main = () => {
     console.log([
       `${colors.cyan}${formatModelName(sessionInfo.modelName)}${colors.reset}`,
       `📁 ${colors.dim}${path.basename(process.cwd())}${colors.reset}`,
-      `🔥 ${usageColor}${formatTokenCount(sessionInfo.totalTokens)}/${formatTokenCount(AUTO_COMPACT_LIMIT)} (${usageColor}${percentage.toFixed(1)}%)${colors.reset}`,
-      ``
+      `🔥 ${usageColor}${formatTokenCount(sessionInfo.totalTokens)}/${formatTokenCount(AUTO_COMPACT_LIMIT)} (${usageColor}${percentage.toFixed(1)}%)${colors.reset}`
     ].join(' │ '));
 
   } catch (error) {
