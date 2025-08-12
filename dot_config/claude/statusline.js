@@ -10,7 +10,7 @@ const COLOR_THRESHOLDS = { WARNING: 50, DANGER: 70 };
 
 const loadPricing = () => {
   try {
-    const pricingPath = path.join(__dirname, 'pricing.json');
+    const pricingPath = path.join(os.homedir(), '.config', 'claude', 'pricing.json');
     if (fs.existsSync(pricingPath)) {
       const pricingData = JSON.parse(fs.readFileSync(pricingPath, 'utf8'));
       return pricingData.models;
