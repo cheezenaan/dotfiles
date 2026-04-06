@@ -1,5 +1,5 @@
 {
-  "model": "sonnet",
+  "model": "default",
   "permissions": {
     "defaultMode": "plan",
     "allow": [],
@@ -21,37 +21,12 @@
     ]
   },
   "env": {
-    "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
-    "MAX_THINKING_TOKENS": "31999"
+    "CLAUDE_CODE_ENABLE_TELEMETRY": "0"
   },
   "includeCoAuthoredBy": false,
   "cleanupPeriodDays": 90,
   "statusLine": {
     "type": "command",
-    "command": "npx ccusage@latest statusline"
-  },
-  "hooks": {
-    "Stop": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "terminal-notifier -title 'Claude Code' -message 'Task completed' -sound default"
-          }
-        ]
-      }
-    ],
-    "Notification": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "terminal-notifier -title 'Claude Code' -message 'Action required' -sound default"
-          }
-        ]
-      }
-    ]
+    "command": "python3 ~/.config/claude/statusline.py"
   }
 }
