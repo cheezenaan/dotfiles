@@ -41,7 +41,7 @@ def render_ctx_bar(pct, width=8):
 
 def render_rate_bar(pct, width=RATE_SEGMENTS):
     filled = min(width, round(pct / 100 * width))
-    bar = "▰" * filled + "▱" * (width - filled)
+    bar = "━" * filled + "╌" * (width - filled)
     return f"{color_for(pct)}{bar}{RESET}"
 
 
@@ -71,7 +71,7 @@ def render_rate_limit_line(emoji, label, seg):
     c = color_for(pct)
     bar = render_rate_bar(pct)
     reset = format_reset_time(seg.get("resets_at"))
-    return f"{emoji}  {DIM}{label}{RESET}  {bar}  {c}{pct:.0f}%{RESET}  {DIM}{reset}{RESET}"
+    return f"{emoji} {DIM}{label}{RESET}   {bar}  {c}{pct:3.0f}%{RESET}  {DIM}{reset}{RESET}"
 
 
 def main():
@@ -110,7 +110,7 @@ def main():
         lines.append(f" {GRAY}│{RESET} ".join(parts))
 
     rl = data.get("rate_limits") or {}
-    for emoji, label, key in [("⏱ ", "5h", "five_hour"), ("📅", "7d", "seven_day")]:
+    for emoji, label, key in [("🕡️", "5h", "five_hour"), ("📅", "7d", "seven_day")]:
         seg = rl.get(key) or {}
         if seg:
             lines.append(render_rate_limit_line(emoji, label, seg))
