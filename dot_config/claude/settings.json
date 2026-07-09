@@ -1,7 +1,10 @@
 {
-  "model": "default",
+  "cleanupPeriodDays": 365,
+  "env": {
+    "CLAUDE_CODE_ENABLE_TELEMETRY": "0"
+  },
+  "includeCoAuthoredBy": false,
   "permissions": {
-    "defaultMode": "plan",
     "allow": [],
     "deny": [
       "Bash(sudo:*)",
@@ -18,15 +21,57 @@
       "Bash(curl:*)",
       "Bash(wget:*)",
       "Bash(nc:*)"
-    ]
+    ],
+    "defaultMode": "plan"
   },
-  "env": {
-    "CLAUDE_CODE_ENABLE_TELEMETRY": "0"
-  },
-  "includeCoAuthoredBy": false,
-  "cleanupPeriodDays": 90,
   "statusLine": {
     "type": "command",
     "command": "python3 ~/.config/claude/statusline.py"
+  },
+  "enabledPlugins": {
+    "skill-creator@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "anthropic-agent-skills": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/skills"
+      }
+    }
+  },
+  "effortLevel": "medium",
+  "theme": "light",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.config/claude/hooks/session-id-cache.sh"
+          }
+        ]
+      }
+    ],
+    "PostCompact": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.config/claude/hooks/compaction-recovery.sh"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.config/claude/hooks/userpromptsubmit-compaction-recovery.sh"
+          }
+        ]
+      }
+    ]
   }
 }
