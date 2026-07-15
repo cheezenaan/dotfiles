@@ -10,7 +10,9 @@ require "fileutils"
 REDACT_PATTERN = /(bearer |api[_-]?key[=:]\s*|token[a-z_]*[=:]\s*|password[a-z_]*[=:]\s*|secret[a-z_]*[=:]\s*)/i
 REDACT_QUOTED = /#{REDACT_PATTERN}"[^"]*"/
 REDACT_BARE = /#{REDACT_PATTERN}\S+/
-SUBCOMMAND_TOOLS = %w[git gh docker kubectl npm pnpm yarn bun cargo make chezmoi brew mise].freeze
+SUBCOMMAND_TOOLS = %w[gh docker kubectl npm pnpm yarn bun cargo make chezmoi brew mise].freeze
+# git 限定: 他ツールは実ログで問題が出てから対応 (YAGNI)
+GIT_GLOBAL_OPTS_WITH_ARG = %w[-C -c --git-dir --work-tree].freeze
 PATH_TOOLS = %w[Read Write Edit].freeze
 # sudo/env prefix は正規化(剥がして集計)ではなく除外。Bash(systemctl:*) は sudo systemctl にマッチしない
 SKIP_COMMAND = /[;&|`]|\$\(|\n|\A(sudo|timeout)\s|\A[A-Za-z_][A-Za-z0-9_]*=[^ ]+ /
@@ -103,14 +105,25 @@ def find_log_files(directory, scope, cutoff)
     .sort
 end
 
+# 確実に判別できたサブコマンドのみ返す。許可リスト外のフラグは引数の有無が不明なので nil に倒す
+def git_subcommand(tokens)
+  args = tokens.drop(1)
+  args.shift(2) while GIT_GLOBAL_OPTS_WITH_ARG.include?(args[0])
+  args[0]&.start_with?("-") ? nil : args[0]
+end
+
 def extract_command_key(command)
-  return "" unless command.is_a?(String) && !command.empty?
-  return "" if command.match?(SKIP_COMMAND)
+  return nil if !command.is_a?(String) || command.empty?
+  return nil if command.match?(SKIP_COMMAND)
 
   tokens = command.split
-  return "" if tokens.empty?
+  return nil if tokens.empty?
 
-  if SUBCOMMAND_TOOLS.include?(tokens[0])
+  # サブコマンド不明の git も "git" として集計に残す
+  if tokens[0] == "git"
+    sub = git_subcommand(tokens)
+    sub ? "git #{sub}" : "git"
+  elsif SUBCOMMAND_TOOLS.include?(tokens[0])
     (tokens.length >= 2 && !tokens[1].start_with?("-")) ? "#{tokens[0]} #{tokens[1]}" : tokens[0]
   else
     tokens[0]
@@ -133,9 +146,7 @@ def load_entries(files)
 
       parsed["decision"] = decision
       parsed["command_key"] = if parsed["tool_name"] == "Bash"
-        extract_command_key(parsed["raw_input_summary"] || "")
-      else
-        ""
+        extract_command_key(parsed["raw_input_summary"])
       end
       acc << parsed
     end
@@ -145,8 +156,8 @@ end
 def grouping_key(entry)
   tool = entry["tool_name"] || ""
   if tool == "Bash"
-    key = entry["command_key"] || ""
-    return nil if key.empty?
+    key = entry["command_key"]
+    return nil unless key
 
     [tool, key]
   elsif PATH_TOOLS.include?(tool)
@@ -262,10 +273,12 @@ def audit(argv)
   puts JSON.pretty_generate(build_report(entries, candidates))
 end
 
-case ARGV.shift
-when "record" then record
-when "audit" then audit(ARGV)
-else
-  warn "Usage: #{$PROGRAM_NAME} {record|audit} [options]"
-  exit 1
+if __FILE__ == $PROGRAM_NAME
+  case ARGV.shift
+  when "record" then record
+  when "audit" then audit(ARGV)
+  else
+    warn "Usage: #{$PROGRAM_NAME} {record|audit} [options]"
+    exit 1
+  end
 end

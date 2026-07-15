@@ -4,6 +4,9 @@ README.md
 settings/
 docs/
 
+# Test files
+**/*_test.rb
+
 # Personal memo files
 .tmp/**/*.md
 
