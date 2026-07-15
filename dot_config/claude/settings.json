@@ -82,6 +82,15 @@
             "command": "~/.config/claude/hooks/permission-log.rb record"
           }
         ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.config/claude/hooks/japanese-tech-writing-check.sh"
+          }
+        ]
       }
     ],
     "PermissionDenied": [

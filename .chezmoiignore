@@ -2,6 +2,7 @@ README.md
 
 # Directories
 settings/
+docs/
 
 # Personal memo files
 .tmp/**/*.md
