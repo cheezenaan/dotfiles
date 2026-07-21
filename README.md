@@ -30,13 +30,13 @@ sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply https://github.com/cheezena
 
 This single command will:
 
-1.  Install chezmoi if it's not present.
-2.  Clone the dotfiles repository.
-3.  Execute the setup scripts (`run_once_*.sh`) in `.chezmoiscripts/`:
-    *   Install essential applications (`Brewfile.core`).
-    *   Optionally install additional applications (`Brewfile`).
-    *   Optionally apply optimized macOS settings.
-4.  Apply the dotfiles managed by chezmoi.
+1. Install chezmoi if it's not present.
+2. Clone the dotfiles repository.
+3. Execute the setup scripts (`run_once_*.sh`) in `.chezmoiscripts/`:
+    * Install essential applications (`Brewfile.core`).
+    * Optionally install additional applications (`Brewfile`).
+    * Optionally apply optimized macOS settings.
+4. Apply the dotfiles managed by chezmoi.
 
 ## Applications to be installed
 
@@ -44,12 +44,12 @@ This single command will:
 
 The following applications will be installed automatically:
 
-- CLI
-    - Homebrew
-- GUI
-    - Google Chrome
-    - Google Japanese Input
-    - 1Password
+* CLI
+  * Homebrew
+* GUI
+  * Google Chrome
+  * Google Japanese Input
+  * 1Password
 
 ### Additional Applications (brew/Brewfile)
 
@@ -61,4 +61,3 @@ You can customize the applications to be installed by editing these files as nee
 ## License
 
 MIT
-
