@@ -24,23 +24,7 @@
     ],
     "defaultMode": "plan"
   },
-  "statusLine": {
-    "type": "command",
-    "command": "python3 ~/.config/claude/statusline.py"
-  },
-  "enabledPlugins": {
-    "skill-creator@claude-plugins-official": true
-  },
-  "extraKnownMarketplaces": {
-    "anthropic-agent-skills": {
-      "source": {
-        "source": "github",
-        "repo": "anthropics/skills"
-      }
-    }
-  },
-  "effortLevel": "medium",
-  "theme": "light",
+  "model": "claude-opus-4-6[1m]",
   "hooks": {
     "SessionStart": [
       {
@@ -115,5 +99,23 @@
         ]
       }
     ]
-  }
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "python3 ~/.config/claude/statusline.py"
+  },
+  "enabledPlugins": {
+    "skill-creator@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "anthropic-agent-skills": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/skills"
+      }
+    }
+  },
+  "effortLevel": "medium",
+  "theme": "light",
+  "agentPushNotifEnabled": true
 }
