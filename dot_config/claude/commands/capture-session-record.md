@@ -22,8 +22,8 @@ Generate comprehensive session records with technical insights and emotional ref
 
 3. **Output Configuration and Generation**
    - Determine output path with the following priority:
-     1. Obsidian: `"$CAPTURE_SESSION_LOG_DIR"`（settings.local.json の env で定義。変数が設定されておりディレクトリが存在する場合。パスにスペースを含むためクォート必須）
-     2. フォールバック: `$(git rev-parse --show-toplevel)/.tmp/_logs`（git リポジトリの場合）または `$(pwd)/.tmp/_logs`
+     1. Obsidian: `"$CAPTURE_SESSION_LOG_DIR"` if set and the directory exists (machine-local env — shell export or per-project `.claude/settings.local.json`; quoted because the path contains spaces)
+     2. Fallback: `$(git rev-parse --show-toplevel)/.tmp/_logs` (in a git repository) or `$(pwd)/.tmp/_logs`
    - Create output directory structure if it doesn't exist
    - Generate filename in format: YYYYmmdd_HHmm_description.md
    - Request description from user or intelligently auto-generate from session context
