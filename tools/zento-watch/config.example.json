@@ -1,0 +1,71 @@
+{
+  "products": [
+    {
+      "id": "signature-single",
+      "label": "uniball ZENTO シグニチャーモデル（単色 / 参考価格 3,300円）",
+      "max_price": 4500,
+      "queries": {
+        "rakuten": "ユニボール ゼント シグニチャー",
+        "yahoo": "ユニボール ゼント シグニチャー"
+      },
+      "match": {
+        "all_of": [
+          ["ゼント", "zento"],
+          ["シグニチャー", "シグネチャー", "signature"]
+        ],
+        "none_of": ["3色", "三色", "多機能", "替芯", "リフィル", "レフィル", "芯のみ", "ケース"]
+      }
+    },
+    {
+      "id": "signature-multi",
+      "label": "uniball ZENTO シグニチャーモデル 3色ボールペン（参考価格 5,500円）",
+      "max_price": 7000,
+      "queries": {
+        "rakuten": "ユニボール ゼント シグニチャー 3色",
+        "yahoo": "ユニボール ゼント シグニチャー 3色"
+      },
+      "match": {
+        "all_of": [
+          ["ゼント", "zento"],
+          ["シグニチャー", "シグネチャー", "signature"],
+          ["3色", "三色"]
+        ],
+        "none_of": ["替芯", "リフィル", "レフィル", "芯のみ", "ケース"]
+      }
+    }
+  ],
+
+  "sources": {
+    "rakuten": { "enabled": true, "app_id_env": "RAKUTEN_APP_ID" },
+    "yahoo": { "enabled": true, "app_id_env": "YAHOO_APP_ID" }
+  },
+
+  "_pages_note": "公式ストア・文具店系は URL と在庫マーカーがサイトごとに違う。--probe URL で候補を出してから enabled を true にすること。",
+  "pages": [
+    {
+      "id": "mpuni-official-single",
+      "enabled": false,
+      "product_id": "signature-single",
+      "label": "三菱鉛筆 公式ストア（単色）",
+      "shop": "三菱鉛筆公式",
+      "url": "",
+      "sold_out_markers": ["SOLD OUT", "売り切れ", "在庫切れ", "入荷お知らせ", "再入荷通知"],
+      "in_stock_markers": ["カートに入れる", "購入手続き"]
+    },
+    {
+      "id": "yodobashi-single",
+      "enabled": false,
+      "product_id": "signature-single",
+      "label": "ヨドバシ.com（単色）",
+      "shop": "ヨドバシ.com",
+      "url": "",
+      "sold_out_markers": ["販売を終了", "入荷次第", "在庫なし"],
+      "in_stock_markers": ["ご注文でお届け", "在庫あり", "カートに入れる"]
+    }
+  ],
+
+  "notify": {
+    "webhook_url_env": "ZENTO_WATCH_WEBHOOK_URL",
+    "cooldown_hours": 6
+  }
+}

@@ -3,3 +3,7 @@ macos/backup/
 
 # Local-only settings
 *.local
+
+# zento-watch local config / state
+tools/zento-watch/config.json
+tools/zento-watch/state.json

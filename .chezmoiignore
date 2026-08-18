@@ -3,6 +3,7 @@ README.md
 # Directories
 settings/
 docs/
+tools/
 
 # Test files
 **/*_test.rb
